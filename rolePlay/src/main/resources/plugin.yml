@@ -4,3 +4,8 @@ version: 0.1
 description: TODO: Description!
 authors: [chibbi, raninninn]
 website: www.spigotmc.org
+commands:
+   kit:
+      description: Your description
+      usage: /<command>
+      permission: yourplugin.yourcommandpermission
