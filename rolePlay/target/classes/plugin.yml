@@ -1,7 +1,7 @@
 main: org.ranin.rolePlay.App
 name: rolePlay
 version: 0.1
-description: TODO: Description!
+description: An exhaustive plugin to make roleplay servers even more enjoyable and challengin.
 authors: [chibbi, raninninn]
 website: www.spigotmc.org
 commands:
