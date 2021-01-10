@@ -6,6 +6,6 @@ authors: [chibbi, raninninn]
 website: www.spigotmc.org
 commands:
    kit:
-      description: Your description
-      usage: /<command>
+      description: Gives You stuff
+      usage: /kit
       permission: yourplugin.yourcommandpermission
