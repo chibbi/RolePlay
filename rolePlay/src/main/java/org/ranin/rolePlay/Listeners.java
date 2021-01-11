@@ -7,12 +7,12 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Listeners implements Listener {
 
-    Cunfig cunf = new Cunfig();
-    FileConfiguration custconfig = cunf.getConfig();
+    public Listeners() {
+    }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (custconfig.getBoolean("youAreAwesome")) {
+        if (App.config.getBoolean("youAreAwesome")) {
             event.getPlayer().sendMessage("You are awesome!");
         } else {
             event.getPlayer().sendMessage("You are not awesome...");

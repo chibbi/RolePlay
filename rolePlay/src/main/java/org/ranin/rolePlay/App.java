@@ -6,11 +6,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class App extends JavaPlugin {
 
-    Cunfig cunf = new Cunfig();
-    FileConfiguration custconfig = cunf.getConfig();
+    public static FileConfiguration config;
 
     @Override
     public void onEnable() {
+        config = getConfig();
+        config.addDefault("youAreAwesome", true);
+        config.options().copyDefaults(true);
+        saveConfig();
         // Initiating other Classes
         this.getCommand("kit").setExecutor(new Commands(getLogger()));
         getServer().getPluginManager().registerEvents(new Listeners(), this);
@@ -18,6 +21,7 @@ public class App extends JavaPlugin {
     }
     @Override
     public void onDisable() {
+        config = null;
         getLogger().info("See you again, SpigotMC!");
     }
 
