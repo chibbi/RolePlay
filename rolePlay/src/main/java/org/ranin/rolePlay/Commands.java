@@ -1,6 +1,7 @@
 package org.ranin.rolePlay;
 
 import java.util.logging.Logger;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
