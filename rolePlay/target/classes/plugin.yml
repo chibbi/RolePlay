@@ -8,4 +8,4 @@ commands:
    kit:
       description: Gives You stuff
       usage: /kit
-      permission: yourplugin.yourcommandpermission
+      permission: rolePlay.default
