@@ -23,4 +23,5 @@ jobs:
     - uses: peter-evans/repository-dispatch@v1
     - name: Trigger Release creation
       with:
+        token: ${{ secrets.REPO_ACCESS_TOKEN }}
         event-type: createPreRelease
