@@ -20,3 +20,7 @@ jobs:
         java-version: 1.8
     - name: Build with Maven
       run: mvn install -f "rolePlay/pom.xml"
+    - uses: peter-evans/repository-dispatch@v1
+    - name: Trigger Release creation
+      with:
+        event-type: createPreRelease
