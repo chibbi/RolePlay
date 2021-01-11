@@ -1,4 +1,5 @@
 package org.ranin.rolePlay;
+
 import java.util.logging.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,7 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.Material;
-public class Command implements CommandExecutor {
+
+public class Commands implements CommandExecutor {
 
     private Logger log;
 
