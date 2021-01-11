@@ -10,7 +10,7 @@ public class App extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        config = getConfig();ff
+        config = getConfig();
         config.addDefault("youAreAwesome", true);
         config.options().copyDefaults(true);
         saveConfig();
