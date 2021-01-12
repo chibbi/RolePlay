@@ -1,11 +1,27 @@
 main: org.ranin.rolePlay.App
-name: rolePlay
-version: 0.1
-description: An exhaustive plugin to make roleplay servers even more enjoyable and challengin.
-authors: [chibbi, raninninn]
-website: www.spigotmc.org
+name: "rolePlay"
+version: 0.1.3
+api-version: 1.16
+authors: ["chibbi", "raninninn"]
+description: "An exhaustive plugin to make roleplay servers even more enjoyable and challengin."
+website: "www.spigotmc.org"
 commands:
    kit:
-      description: Gives You stuff
-      usage: /kit
-      permission: rolePlay.default
+      description: "Gives You stuff"
+      usage: "/kit KIT"
+      permission: rolePlay.kit
+   job:
+      description: "lets you choose your job"
+      usage: "/job JOB"
+      permission: rolePlay.job
+      aliases: ["skill", "sk"]
+permissions:
+   rolePlay.kit:
+      description: Permission for the /kit command
+      default: op
+   rolePlay.job:
+      description: Permission for the /kit command
+      default: true
+   rolePlay.skill:
+      description: Permission for the /kit command
+      default: op
