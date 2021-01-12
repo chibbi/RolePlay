@@ -17,10 +17,10 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (App.config.getBoolean("youAreAwesome")) {
-            event.getPlayer().sendMessage("You are awesome!");
+        if (App.config.getBoolean("imperatormode")) {
+            event.getPlayer().sendTitle("all HAIL imeperator CHIBBI!", "", 40, 100, 40);
         } else {
-            event.getPlayer().sendMessage("You are not awesome...");
+            event.getPlayer().sendTitle("You are awesome!", "", 40, 100, 40);
         }
         event.setJoinMessage("Welcome, " + event.getPlayer().getName() + "!");
     }

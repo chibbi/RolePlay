@@ -12,8 +12,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.Material;
 
 public class JobCommand implements CommandExecutor {
 
@@ -29,17 +27,13 @@ public class JobCommand implements CommandExecutor {
         } else {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                switch (args[0]) {
-                    case "diamond":
-                        player.getInventory().addItem(nItem(Material.DIAMOND, 2));
-                        log.info("Gave " + player.getName() + " 1 Diamond");
-                        return true;
-                    case "bricks":
-                        player.getInventory().addItem(nItem(Material.BRICK, 20));
-                        log.info("Gave " + player.getName() + "20 Bricks");
-                        return true;
+                switch (args[1]) {
+                    case "main":
+                        return switchJobs(args[2], player, "main_job");
+                    case "second":
+                        return switchJobs(args[2], player, "second_job");
                     default:
-                        player.sendMessage("§7List of existing Kits:\ndiamond,bricks");
+                        player.sendMessage("§7List of existing Jobs:\nblacksmith,miner");
                         log.info(player.getName() + " has tried: " + Arrays.toString(args));
                 }
             } else {
@@ -49,11 +43,20 @@ public class JobCommand implements CommandExecutor {
         return false;
     }
 
-    public ItemStack nItem(Material mat, int am) {
-        // https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html#ACACIA_BOAT
-        ItemStack items = new ItemStack(mat);
-        items.setAmount(am);
-        return items;
+    public boolean switchJobs(String arg, Player player, String column) {
+        switch (arg) {
+            case "blacksmith":
+                new Jobsql(log).addtoJobTable(player.getName(), column, "blacksmith");
+                log.info("Gave " + player.getName() + " job: " + "blacksmith");
+                return true;
+            case "miner":
+                new Jobsql(log).addtoJobTable(player.getName(), column, "miner");
+                log.info("Gave " + player.getName() + "job: " + "miner");
+                return true;
+            default:
+                player.sendMessage("§7List of existing Jobs:\nblacksmith,miner");
+                log.info(player.getName() + " has tried: " + arg);
+        }
+        return false;
     }
-
 }

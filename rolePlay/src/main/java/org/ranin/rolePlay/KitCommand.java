@@ -30,14 +30,16 @@ public class KitCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 switch (args[0]) {
-                    case "blacksmith":
-                        log.info("Gave " + player.getName() + " job: " + "blacksmith");
+                    case "diamond":
+                        player.getInventory().addItem(nItem(Material.DIAMOND, 2));
+                        log.info("Gave " + player.getName() + " 1 Diamond");
                         return true;
-                    case "miner":
-                        log.info("Gave " + player.getName() + "job: " + "miner");
+                    case "bricks":
+                        player.getInventory().addItem(nItem(Material.BRICK, 20));
+                        log.info("Gave " + player.getName() + "20 Bricks");
                         return true;
                     default:
-                        player.sendMessage("§7List of existing Jobs:\nblacksmith,miner");
+                        player.sendMessage("§7List of existing Kits:\ndiamond,bricks");
                         log.info(player.getName() + " has tried: " + Arrays.toString(args));
                 }
             } else {
