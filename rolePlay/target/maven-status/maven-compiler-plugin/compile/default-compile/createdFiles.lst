@@ -1,4 +1,10 @@
+org/ranin/rolePlay/job/JobCrafting.class
 org/ranin/rolePlay/job/JobListener.class
+org/ranin/rolePlay/job/XpConfig.class
+org/ranin/rolePlay/Listeners.class
+org/ranin/rolePlay/job/JobCommand.class
 org/ranin/rolePlay/job/Job.class
 org/ranin/rolePlay/job/Jobsql.class
+org/ranin/rolePlay/App.class
 org/ranin/rolePlay/KitCommand.class
+org/ranin/rolePlay/job/JobConfig.class

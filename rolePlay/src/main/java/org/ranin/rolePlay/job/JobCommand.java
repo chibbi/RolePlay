@@ -44,6 +44,19 @@ public class JobCommand implements CommandExecutor {
                         player.sendMessage("§7You have to first declare youre main job\n"
                                 + "Like that:/job main blacksmith/miner\n");
                         return false;
+                    case "xp":
+                        String[] info = new Jobsql(log).readfromJobTable(player.getName());
+                        switch (args[1]) {
+                            case "main":
+                                new Jobsql(log).AddXp(player.getName(), 0, Integer.parseInt(args[2]), info);
+                                return true;
+                            case "second":
+                                new Jobsql(log).AddXp(player.getName(), 2, Integer.parseInt(args[2]), info);
+                                return true;
+                        }
+                        player.sendMessage("§7You have to first declare youre main job\n"
+                                + "Like that:/job main blacksmith/miner\n");
+                        return false;
                     default:
                         player.sendMessage(
                                 "§7Usage:\n/job main/second blacksmith/miner\nlist of all existing Jobs:\nblacksmith,miner, ... ");
@@ -54,6 +67,7 @@ public class JobCommand implements CommandExecutor {
             }
         }
         return false;
+
     }
 
     public boolean switchJobs(String arg, Player player, String column) {

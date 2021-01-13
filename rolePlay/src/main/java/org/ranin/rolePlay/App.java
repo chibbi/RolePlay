@@ -7,8 +7,10 @@ TODO: ["add all future classes", "let it do stuff"]
 */
 
 import org.ranin.rolePlay.job.JobCommand;
+import org.ranin.rolePlay.job.JobConfig;
 import org.ranin.rolePlay.job.JobListener;
 import org.ranin.rolePlay.job.Jobsql;
+import org.ranin.rolePlay.job.XpConfig;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -22,6 +24,8 @@ public class App extends JavaPlugin {
         config.addDefault("imperatormode", true);
         config.options().copyDefaults(true);
         saveConfig();
+        new JobConfig(getLogger()).getCustomConfig();
+        new XpConfig(getLogger()).getCustomConfig();
         new Jobsql(getLogger()).createJobTable();
         // Initiating other Classes
         // this.getCommand("kit").setExecutor(new KitCommand(getLogger()));

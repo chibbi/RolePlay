@@ -23,10 +23,12 @@ public class Job {
 
     private Logger log;
 
-    public FileConfiguration config;
+    public FileConfiguration jobConfig;
+    public FileConfiguration xpConfig;
 
     public Job(Logger logg) {
-        config = new JobConfig(logg).getCustomConfig();
+        jobConfig = new JobConfig(logg).getCustomConfig();
+        xpConfig = new XpConfig(logg).getCustomConfig();
         log = logg;
     }
 
@@ -55,7 +57,7 @@ public class Job {
 
     public void setEffects(Player player, String job, int xp) {
         int posAmp = xp;
-        ArrayList<String> positives = (ArrayList<String>) config.getStringList(job + ".effects.positives");
+        ArrayList<String> positives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.positives");
         for (String positive : positives) {
             if (positive.strip() == "" || positive == null || positive == "TEMPLATE") {
                 break;
@@ -63,7 +65,7 @@ public class Job {
             giveEffect(player, PotionEffectType.getByName(positive), posAmp);
         }
         int negAmp = xp / 2;
-        ArrayList<String> negatives = (ArrayList<String>) config.getStringList(job + ".effects.negatives");
+        ArrayList<String> negatives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.negatives");
         for (String negative : negatives) {
             if (negative.strip() == "" || negative == null || negative == "TEMPLATE") {
                 break;
@@ -92,12 +94,15 @@ public class Job {
                 }
                 switch (value) {
                     case "miner":
+                        System.out.println(xpConfig.getList("miner.break.ore"));
                         if (block.getType().name().contains("ORE")) {
-                            new Jobsql(log).AddXp(player.getName(), i, 20, info);
+                            new Jobsql(log).AddXp(player.getName(), i, xpConfig.getInt("miner.break.ore.default"),
+                                    info);
                         } else if (block.getType().name() == "COBBLESTONE" || block.getType().name() == "STONE"
                                 || block.getType().name() == "GRANITE" || block.getType().name() == "DIORITE"
                                 || block.getType().name() == "ANDESITE") {
-                            new Jobsql(log).AddXp(player.getName(), i, 4, info);
+                            new Jobsql(log).AddXp(player.getName(), i, xpConfig.getInt("miner.break.rock.default"),
+                                    info);
                         }
                         break;
 
