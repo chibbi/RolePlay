@@ -2,6 +2,10 @@
 RolePlay is a Spigot plugin that adds skill trees, classes that you have to commit to and a financial system.
 
 ## Notices:  
+ - jobs.yml not wrking yet => everything hardcoded => ist oke
+ - GUI manager?
+ - Command Completer? (Tabcomplete)
+ 
  - Logger levels:
  - SEVERE (highest value)
  - WARNING
