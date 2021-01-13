@@ -10,17 +10,16 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 public class JobConfig {
 
-    private FileConfiguration customConfig;
     private Logger log;
+    private String name = "jobs.yml";
 
-    public JobConfig(Logger logg, String name) {
+    public JobConfig(Logger logg) {
         log = logg;
-        createCustomConfig(name);
     }
 
     private FileConfiguration createCustomConfig(String name) {
         File customConfigFile = new File("plugins/rolePlay/", name);
-        FileConfiguration cusconf = null;
+        FileConfiguration cusconf = YamlConfiguration.loadConfiguration(customConfigFile);
         if (!customConfigFile.exists()) {
             try {
                 customConfigFile.createNewFile();
@@ -28,93 +27,121 @@ public class JobConfig {
                 log.warning("\033[31mCould not create a custom config\033[39m");
                 log.info(e.getMessage());
             }
-        }
-        cusconf = YamlConfiguration.loadConfiguration(customConfigFile);
-
-        cusconf.addDefault("miner", true);
-        cusconf.addDefault("farmer", true);
-        cusconf.addDefault("lumberjack", true);
-        cusconf.addDefault("builder", false);
-        cusconf.addDefault("fisherman", false);
-        cusconf.addDefault("hunter", true);
-        cusconf.addDefault("warrior", true);
-        cusconf.addDefault("knight", true);
-        cusconf.addDefault("assassin", true);
-        cusconf.addDefault("messenger", false);
-        cusconf.addDefault("merchant", true);
-        cusconf.addDefault("painter", true);
-        cusconf.addDefault("stonemason", true);
-        cusconf.addDefault("blacksmith", true);
-        ArrayList<String> list = new ArrayList<String>();
-        list.add("haste");
-        list.add("luck");
-        cusconf.addDefault("miner.effects.positives", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("farmer.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("lumberjack.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("builder.effects", list);
-        list = new ArrayList<String>();
-        list.add("dolphin's grace");
-        list.add("conduit power");
-        list.add("water breathing");
-        cusconf.addDefault("fisherman.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("hunter.effects", list);
-        list = new ArrayList<String>();
-        list.add("absorption");
-        list.add("");
-        cusconf.addDefault("warrior.effects", list);
-        list = new ArrayList<String>();
-        list.add("absorption");
-        list.add("regeneration");
-        list.add("hero of the village");
-        cusconf.addDefault("knight.effects", list);
-        list = new ArrayList<String>();
-        list.add("speed");
-        list.add("slow falling");
-        list.add("bad omen");
-        cusconf.addDefault("assassin.effects", list);
-        list = new ArrayList<String>();
-        list.add("speed");
-        list.add("jump boost");
-        cusconf.addDefault("messenger.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("merchant.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("painter.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("stonemason.effects", list);
-        list = new ArrayList<String>();
-        list.add("");
-        list.add("");
-        cusconf.addDefault("blacksmith.effects", list);
-        try {
-            cusconf.save(customConfigFile);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            cusconf.set("miner", true);
+            cusconf.set("farmer", true);
+            cusconf.set("lumberjack", true);
+            cusconf.set("builder", false);
+            cusconf.set("fisherman", false);
+            cusconf.set("hunter", true);
+            cusconf.set("warrior", true);
+            cusconf.set("knight", true);
+            cusconf.set("assassin", true);
+            cusconf.set("messenger", false);
+            cusconf.set("merchant", true);
+            cusconf.set("painter", true);
+            cusconf.set("stonemason", true);
+            cusconf.set("blacksmith", true);
+            ArrayList<String> list = new ArrayList<String>();
+            list.add("FAST_DIGGING");
+            list.add("LUCK");
+            cusconf.set("miner.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("farmer.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("lumberjack.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("builder.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("DOLPHINS_GRACE");
+            list.add("CONDUIT_POWER");
+            list.add("WATER_BREATHING");
+            cusconf.set("fisherman.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("hunter.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("ABSORPTION");
+            cusconf.set("warrior.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("ABSORPTION");
+            list.add("HERO_OF_THE_VILLAGE");
+            cusconf.set("knight.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("SPEED");
+            list.add("SLOW_FALLING");
+            cusconf.set("assassin.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("SPEED");
+            list.add("JUMP");
+            cusconf.set("messenger.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("HERO_OF_THE_VILLAGE");
+            cusconf.set("merchant.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("painter.effects.positives", list);
+            list = new ArrayList<String>();
+            cusconf.set("stonemason.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("blacksmith.effects.positives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("miner.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("farmer.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("lumberjack.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("builder.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("fisherman.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("hunter.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("warrior.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("knight.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("BAD_OMEN");
+            cusconf.set("assassin.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("messenger.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("merchant.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("painter.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("stonemason.effects.negatives", list);
+            list = new ArrayList<String>();
+            list.add("TEMPLATE");
+            cusconf.set("blacksmith.effects.negatives", list);
+            try {
+                cusconf.save(customConfigFile);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
         return cusconf;
     }
 
     public FileConfiguration getCustomConfig() {
-        return this.customConfig;
+        return createCustomConfig(name);
     }
 
 }

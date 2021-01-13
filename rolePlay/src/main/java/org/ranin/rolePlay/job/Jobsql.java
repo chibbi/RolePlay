@@ -45,7 +45,7 @@ public class Jobsql {
         try {
             conn = DriverManager.getConnection(playerLoc);
 
-            log.info("connected to Player database");
+            log.fine("connected to Player database");
             return true;
         } catch (SQLException e) {
             log.severe("\033[31mCould not connect to Player database\033[39m at: " + playerLoc);
@@ -58,7 +58,7 @@ public class Jobsql {
         try {
             if (conn != null) {
                 conn.close();
-                log.info("disconnected from Player database");
+                log.fine("disconnected from Player database");
             }
             return true;
         } catch (SQLException e) {
@@ -129,6 +129,43 @@ public class Jobsql {
         return res;
     }
 
+    public String[] UpdateJobinJobTable(String player, String column, String job) {
+        String[] res = new String[8];
+        String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, job);
+            pstmt.setString(2, player);
+            pstmt.executeUpdate();
+            disconnect();
+            return res;
+        } catch (SQLException e) {
+            log.warning(
+                    "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
+            log.info(e.getMessage());
+        }
+        disconnect();
+        return res;
+    }
+
+    public String[] UpdateXpinJobTable(String player, String column, int xp) {
+        log.info("player: " + player + " job: " + column.replace("_xp", "") + " xp: " + xp);
+        String[] res = new String[8];
+        String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, xp);
+            pstmt.setString(2, player);
+            pstmt.executeUpdate();
+            disconnect();
+            return res;
+        } catch (SQLException e) {
+            log.warning("\033[31mCould not update Xp in Jobtable at player = " + player + " on " + dbname
+                    + " database\033[39m");
+            log.info(e.getMessage());
+        }
+        disconnect();
+        return res;
+    }
+
     public boolean deletefromJobTable(String player) {
         String sql = "DELETE FROM " + dbname + " WHERE player = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -142,5 +179,28 @@ public class Jobsql {
         }
         disconnect();
         return false;
+    }
+
+    public String getColumn(int i) {
+        switch (i) {
+            case 0:
+                return "main_job";
+            case 1:
+                return "main_job_xp";
+            case 2:
+                return "second_job";
+            case 3:
+                return "second_job_xp";
+            case 4:
+                return "main_hobby";
+            case 5:
+                return "main_hobby_xp";
+            case 6:
+                return "second_hobby";
+            case 7:
+                return "second_hobby_xp";
+            default:
+                return "ERROR in getColumn(" + i + ")";
+        }
     }
 }
