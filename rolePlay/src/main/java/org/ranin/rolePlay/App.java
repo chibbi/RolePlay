@@ -24,7 +24,7 @@ public class App extends JavaPlugin {
         saveConfig();
         new Jobsql(getLogger()).createJobTable();
         // Initiating other Classes
-        this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
+        // this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         this.getCommand("job").setExecutor(new JobCommand(getLogger()));
         getServer().getPluginManager().registerEvents(new Listeners(), this);
         getServer().getPluginManager().registerEvents(new JobListener(getLogger()), this);

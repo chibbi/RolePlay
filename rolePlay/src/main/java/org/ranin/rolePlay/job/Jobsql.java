@@ -104,10 +104,11 @@ public class Jobsql {
     }
 
     public String[] readfromJobTable(String player) {
-        String[] res = new String[7];
-        String sql = "SELECT * FROM " + dbname + " WHERE player = " + player + ";";
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery(sql);
+        String[] res = new String[8];
+        String sql = "SELECT * FROM " + dbname + " WHERE player=?;";
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, player);
+            ResultSet rs = pstmt.executeQuery();
             res[0] = rs.getString("main_job");
             res[1] = String.valueOf(rs.getInt("main_job_xp"));
             res[2] = rs.getString("second_job");
