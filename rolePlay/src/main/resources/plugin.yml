@@ -8,15 +8,12 @@ website: "www.spigotmc.org"
 commands:
    kit:
       description: "Gives You stuff"
-      usage: "/kit KIT"
       permission: rolePlay.kit
    job:
       description: "lets you choose your job"
-      usage: "/job main JOB"
       permission: rolePlay.job
    hobby:
       description: "lets you choose your job"
-      usage: "/hobby main HOBBY"
       permission: rolePlay.hobby
 permissions:
    rolePlay.kit:
