@@ -124,9 +124,9 @@ public class Jobsql {
             // log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
             disconnect();
         } catch (SQLException e) {
-            log.warning(
-                    "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
-            log.info(e.getMessage());
+            //log.warning(
+            //        "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
+            //log.info(e.getMessage());
             res[0] = null;
         }
         disconnect();
