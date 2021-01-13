@@ -105,7 +105,7 @@ public class Jobsql {
 
     public String[] readfromJobTable(String player) {
         String[] res = new String[7];
-        String sql = "SELECT * FROM " + dbname + " WHERE player = " + player + " ;";
+        String sql = "SELECT * FROM " + dbname + " WHERE player = " + player + ";";
         try (Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(sql);
             res[0] = rs.getString("main_job");

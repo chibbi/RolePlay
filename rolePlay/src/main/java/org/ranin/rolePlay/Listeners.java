@@ -18,9 +18,9 @@ public class Listeners implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (App.config.getBoolean("imperatormode")) {
-            event.getPlayer().sendTitle("all HAIL imeperator CHIBBI!", "", 40, 100, 40);
+            event.getPlayer().sendTitle("all HAIL imeperator CHIBBI!", "", 20, 45, 20);
         } else {
-            event.getPlayer().sendTitle("You are awesome!", "", 40, 100, 40);
+            event.getPlayer().sendTitle("You are awesome!", "", 20, 45, 20);
         }
         event.setJoinMessage("Welcome, " + event.getPlayer().getName() + "!");
     }

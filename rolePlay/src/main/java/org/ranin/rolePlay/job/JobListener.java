@@ -59,7 +59,7 @@ public class JobListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             new Job(log).breaks(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just broke " + event.getBlock() + "!");
+                    "say " + event.getPlayer().getName() + " just broke " + event.getBlock().getType() + "!");
         }
     }
 
@@ -68,7 +68,7 @@ public class JobListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             new Job(log).places(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just placed a " + event.getBlock() + "!");
+                    "say " + event.getPlayer().getName() + " just placed a " + event.getBlock().getType() + "!");
         }
     }
 

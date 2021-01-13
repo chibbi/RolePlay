@@ -23,17 +23,25 @@ public class JobCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (args.length == 0) {
+        if (args.length == 0 || args.length == 1) {
+            if (sender instanceof Player) {
+                Player player = (Player) sender;
+                player.sendMessage(
+                        "§7You have to first specify, if you want to declare youre main job, or your second job\n"
+                                + "Like that:/job main/second blacksmith/miner\n");
+                log.info(player.getName() + " has forgot Arguments: " + Arrays.toString(args));
+            }
         } else {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                switch (args[1]) {
+                switch (args[0]) {
                     case "main":
-                        return switchJobs(args[2], player, "main_job");
+                        return switchJobs(args[1], player, "main_job");
                     case "second":
-                        return switchJobs(args[2], player, "second_job");
+                        return switchJobs(args[1], player, "second_job");
                     default:
-                        player.sendMessage("§7List of existing Jobs:\nblacksmith,miner");
+                        player.sendMessage(
+                                "§7Usage:\n/job main/second blacksmith/miner\nlist of all existing Jobs:\nblacksmith,miner, ... ");
                         log.info(player.getName() + " has tried: " + Arrays.toString(args));
                 }
             } else {

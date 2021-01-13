@@ -3,15 +3,12 @@ package org.ranin.rolePlay.job;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
 import java.util.List;
 import java.util.logging.Logger;
-
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.ranin.rolePlay.App;
 
 /*
 author: ["chibbi","raninninn"]
@@ -26,7 +23,7 @@ public class Job {
     public FileConfiguration config;
 
     public Job(Logger logg) {
-        config = new App().getCustomConfig();
+        config = new JobConfig(logg, "jobs.yml").getCustomConfig();
         log = logg;
     }
 
