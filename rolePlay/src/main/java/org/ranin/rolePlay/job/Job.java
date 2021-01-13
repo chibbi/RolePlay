@@ -56,6 +56,7 @@ public class Job {
     }
 
     public void setEffects(Player player, String job, int xp) {
+        log.info("player: " + player + " job: " + job +  " xp: " + xp);
         int posAmp = xp;
         ArrayList<String> positives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.positives");
         for (String positive : positives) {

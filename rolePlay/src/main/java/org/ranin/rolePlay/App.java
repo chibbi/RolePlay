@@ -28,8 +28,9 @@ public class App extends JavaPlugin {
         new XpConfig(getLogger()).getCustomConfig();
         new Jobsql(getLogger()).createJobTable();
         // Initiating other Classes
-        // this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         this.getCommand("job").setExecutor(new JobCommand(getLogger()));
+        //this.getCommand("hobby").setExecutor(new HobbyCommand(getLogger()));
+        this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         getServer().getPluginManager().registerEvents(new Listeners(), this);
         getServer().getPluginManager().registerEvents(new JobListener(getLogger()), this);
         getLogger().info("Hello, SpigotMC!");

@@ -27,6 +27,11 @@ public class JobConfig {
                 log.warning("\033[31mCould not create a custom config\033[39m");
                 log.info(e.getMessage());
             }
+            ArrayList<String> list = new ArrayList<String>();
+            list.add("miner");
+            list.add("farmer");
+            // TODO: MATTI
+            cusconf.set("alljobs", list);
             cusconf.set("miner", true);
             cusconf.set("farmer", true);
             cusconf.set("lumberjack", true);
@@ -41,7 +46,7 @@ public class JobConfig {
             cusconf.set("painter", true);
             cusconf.set("stonemason", true);
             cusconf.set("blacksmith", true);
-            ArrayList<String> list = new ArrayList<String>();
+            list = new ArrayList<String>();
             list.add("FAST_DIGGING");
             list.add("LUCK");
             cusconf.set("miner.effects.positives", list);

@@ -11,6 +11,7 @@ sources:
 */
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,12 +19,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
+
+
 import org.bukkit.Bukkit;
 
 public class Jobsql {
 
     private Logger log;
     private Connection conn = null;
+
+    String uuidUlr = "https://api.mojang.com/users/profiles/minecraft/";
 
     private String playerLoc = "jdbc:sqlite:plugins/rolePlay/db/Player.db";
     private String dbname = "playerjobs";
@@ -88,7 +93,7 @@ public class Jobsql {
     public boolean addtoJobTable(String player, String column, String job) {
         String sql = "INSERT INTO " + dbname + "(player," + column + ") VALUES(?,?);";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, player);
+            pstmt.setString(1, getUuid(player));
             pstmt.setString(2, job);
             pstmt.executeUpdate();
             disconnect();
@@ -106,7 +111,7 @@ public class Jobsql {
         String[] res = new String[8];
         String sql = "SELECT * FROM " + dbname + " WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, player);
+            pstmt.setString(1, getUuid(player));
             ResultSet rs = pstmt.executeQuery();
             res[0] = rs.getString("main_job");
             res[1] = String.valueOf(rs.getInt("main_job_xp"));
@@ -133,7 +138,7 @@ public class Jobsql {
         String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, job);
-            pstmt.setString(2, player);
+            pstmt.setString(2, getUuid(player));
             pstmt.executeUpdate();
             disconnect();
             return res;
@@ -151,7 +156,7 @@ public class Jobsql {
         String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, xp);
-            pstmt.setString(2, player);
+            pstmt.setString(2, getUuid(player));
             pstmt.executeUpdate();
             disconnect();
             return res;
@@ -165,6 +170,7 @@ public class Jobsql {
     }
 
     public void AddXp(String player, int i, int j, String[] info) {
+        player = getUuid(player);
         if (info[i + 1] == null) {
             // TODO: less xp for not main_job and even less for hobbys ....
             UpdateXpinJobTable(player, getColumn(i + 1), j);
@@ -177,7 +183,7 @@ public class Jobsql {
     public boolean deletefromJobTable(String player) {
         String sql = "DELETE FROM " + dbname + " WHERE player = ?";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, player);
+            pstmt.setString(1, getUuid(player));
             pstmt.executeUpdate();
             disconnect();
             return true;
@@ -187,6 +193,11 @@ public class Jobsql {
         }
         disconnect();
         return false;
+    }
+
+    public String getUuid(String player) {
+        return(player);
+
     }
 
     public String getColumn(int i) {

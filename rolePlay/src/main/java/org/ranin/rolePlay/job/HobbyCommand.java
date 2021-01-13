@@ -16,12 +16,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class JobCommand implements CommandExecutor {
+public class HobbyCommand implements CommandExecutor {
 
     private Logger log;
+
     private FileConfiguration jobConfig;
 
-    public JobCommand(Logger logg) {
+    public HobbyCommand(Logger logg) {
         jobConfig = new JobConfig(logg).getCustomConfig();
         log = logg;
     }
@@ -32,8 +33,8 @@ public class JobCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 player.sendMessage(
-                        "§7You have to first specify, if you want to declare youre main job, or your second job\n"
-                                + "Like that:/job main/second blacksmith/miner\n");
+                        "§7You have to first specify, if you want to declare youre main hobby, or your second hobby\n"
+                                + "Like that:/hobby main/second blacksmith/miner\n");
                 log.info(player.getName() + " has forgot Arguments: " + Arrays.toString(args));
             }
         } else {
@@ -41,13 +42,13 @@ public class JobCommand implements CommandExecutor {
                 Player player = (Player) sender;
                 switch (args[0]) {
                     case "main":
-                        return switchJobs(args[1], player, "main_job",true);
+                        return switchJobs(args[1], player, "main_hobby");
                     case "second":
                         if (new Jobsql(log).readfromJobTable(player.getName())[0] != null) {
-                            return switchJobs(args[1], player, "second_job", false);
+                            return switchJobs(args[1], player, "second_hobby");
                         }
-                        player.sendMessage("§7You have to first declare youre main job\n"
-                                + "Like that:/job main blacksmith/miner\n");
+                        player.sendMessage("§7You have to first declare youre main hobby\n"
+                                + "Like that:/hobby main blacksmith/miner\n");
                         return false;
                     case "xp":
                         String[] info = new Jobsql(log).readfromJobTable(player.getName());
@@ -59,12 +60,12 @@ public class JobCommand implements CommandExecutor {
                                 new Jobsql(log).AddXp(player.getName(), 2, Integer.parseInt(args[2]), info);
                                 return true;
                         }
-                        player.sendMessage("§7You have to first declare youre main job\n"
-                                + "Like that:/job main blacksmith/miner\n");
+                        player.sendMessage("§7You have to first declare youre main hobby\n"
+                                + "Like that:/hobby main blacksmith/miner\n");
                         return false;
                     default:
                         player.sendMessage(
-                                "§7Usage:\n/job main/second blacksmith/miner\nlist of all existing Jobs:\nblacksmith,miner, ... ");
+                                "§7Usage:\n/hobby main/second blacksmith/miner\nlist of all existing hobbys:\nblacksmith,miner, ... ");
                         log.info(player.getName() + " has tried: " + Arrays.toString(args));
                 }
             } else {
@@ -75,15 +76,11 @@ public class JobCommand implements CommandExecutor {
 
     }
 
-    public boolean switchJobs(String arg, Player player, String column, boolean add) {
+    public boolean switchJobs(String arg, Player player, String column) {
         ArrayList<String> alljobs = (ArrayList<String>) jobConfig.getStringList("alljobs");
         for (String job : alljobs) {
             if(arg == job) {
-                if(!add) {
-                    new Jobsql(log).UpdateJobinJobTable(player.getName(), column, "blacksmith");
-                } else {
-                    new Jobsql(log).addtoJobTable(player.getName(), column, "blacksmith");
-                }
+                new Jobsql(log).UpdateJobinJobTable(player.getName(), column, "blacksmith");
                 return true;
             }
         }

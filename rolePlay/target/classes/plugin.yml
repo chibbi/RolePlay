@@ -12,9 +12,12 @@ commands:
       permission: rolePlay.kit
    job:
       description: "lets you choose your job"
-      usage: "/job JOB"
+      usage: "/job main JOB"
       permission: rolePlay.job
-      aliases: ["skill", "sk"]
+   hobby:
+      description: "lets you choose your job"
+      usage: "/hobby main HOBBY"
+      permission: rolePlay.hobby
 permissions:
    rolePlay.kit:
       description: Permission for the /kit command
@@ -22,6 +25,6 @@ permissions:
    rolePlay.job:
       description: Permission for the /kit command
       default: true
-   rolePlay.skill:
+   rolePlay.hobby:
       description: Permission for the /kit command
-      default: op
+      default: true
