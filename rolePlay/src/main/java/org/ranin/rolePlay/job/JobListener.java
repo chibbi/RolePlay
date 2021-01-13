@@ -134,20 +134,6 @@ public class JobListener implements Listener {
     }
 
     @EventHandler
-    public void onCraft(CraftItemEvent event) {
-        if (event.getWhoClicked() instanceof Player) {
-            new JobCrafting(log).crafts(event.getWhoClicked(), event.getRecipe().getResult());
-            // TODO: add, that warrior automatically gets smite and ban of arthorods ... on
-            // his swords he crafts
-            // TODO: add lumberjack auto effiecency on axe
-            // TODO: add miner auto effiecency on pickaxe (haste to?? or only hast?)
-            // TODO: think about the rest of the classes
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getWhoClicked().getName() + " just crafted " + event.getRecipe().getResult() + "!");
-        }
-    }
-
-    @EventHandler
     public void onEnchant(EnchantItemEvent event) {
         if (event.getEnchanter() instanceof Player) {
             new JobCrafting(log).enchants(event.getEnchanter(), event.getEnchantsToAdd());
@@ -158,6 +144,20 @@ public class JobListener implements Listener {
             // TODO: think about the rest of the classes
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getEnchanter().getName() + " just crafted " + event.getEnchantsToAdd() + "!");
+        }
+    }
+
+    @EventHandler
+    public void onCraft(CraftItemEvent event) {
+        if (event.getWhoClicked() instanceof Player) {
+            new JobCrafting(log).crafts(event.getWhoClicked(), event.getRecipe().getResult());
+            // TODO: add, that warrior automatically gets smite and ban of arthorods ... on
+            // his swords he crafts
+            // TODO: add lumberjack auto effiecency on axe
+            // TODO: add miner auto effiecency on pickaxe (haste to?? or only hast?)
+            // TODO: think about the rest of the classes
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+                    "say " + event.getWhoClicked().getName() + " just crafted " + event.getRecipe().getResult() + "!");
         }
     }
 }

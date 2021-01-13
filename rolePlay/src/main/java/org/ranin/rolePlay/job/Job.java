@@ -92,7 +92,6 @@ public class Job {
                 }
                 switch (value) {
                     case "miner":
-                        log.info("IS A MINER");
                         if (block.getType().name().contains("ORE")) {
                             new Jobsql(log).AddXp(player.getName(), i, 20, info);
                         } else if (block.getType().name() == "COBBLESTONE" || block.getType().name() == "STONE"
