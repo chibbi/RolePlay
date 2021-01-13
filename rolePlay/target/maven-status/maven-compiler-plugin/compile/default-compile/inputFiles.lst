@@ -1,10 +1,13 @@
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/XpConfig.java
-/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobListener.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobConfig.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/finance/MoneyConfig.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/App.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Jobsql.java
-/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCommand.java
-/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Job.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/KitCommand.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCrafting.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/finance/Finance.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobListener.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/HobbyCommand.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Job.java
+/home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCommand.java
 /home/chibbi/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Listeners.java
