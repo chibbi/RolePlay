@@ -31,7 +31,7 @@ public class Job {
     }
 
     private void giveEffect(Player player, PotionEffectType potion, int amplifier) {
-        if (amplifier <= 0) {
+        if (amplifier <= 0 || potion == null) {
         } else {
             player.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, amplifier));
         }
@@ -39,13 +39,18 @@ public class Job {
 
     public void loadEffects(Player player) {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
-        for (PotionEffect eff : player.getActivePotionEffects()) {
-            player.removePotionEffect(eff.getType());
+        if (info[0] == null) {
+            log.fine("No Job yet");
+            System.out.println(info);
+        } else {
+            for (PotionEffect eff : player.getActivePotionEffects()) {
+                player.removePotionEffect(eff.getType());
+            }
+            setEffects(player, info[0], (Integer.parseInt(info[1])));
+            setEffects(player, info[2], (Integer.parseInt(info[3])));
+            setEffects(player, info[4], (Integer.parseInt(info[5])));
+            setEffects(player, info[6], (Integer.parseInt(info[7])));
         }
-        setEffects(player, info[0], (Integer.parseInt(info[1])));
-        setEffects(player, info[2], (Integer.parseInt(info[3])));
-        setEffects(player, info[4], (Integer.parseInt(info[5])));
-        setEffects(player, info[6], (Integer.parseInt(info[7])));
     }
 
     public void setEffects(Player player, String job, int xp) {
@@ -63,7 +68,6 @@ public class Job {
             if (negative.strip() == "" || negative == null || negative == "TEMPLATE") {
                 break;
             }
-            log.info(negative);
             giveEffect(player, PotionEffectType.getByName(negative), negAmp);
         }
     }
@@ -78,27 +82,29 @@ public class Job {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
         int i = 0;
         for (String value : info) {
-            try {
-                if (Integer.parseInt(value) % 2 == 0) {
+            if (value == null) {
+            } else {
+                try {
+                    if (Integer.parseInt(value) % 2 == 0) {
 
-                }
-            } catch (NumberFormatException e) {
-                log.warning("\033[31mCould not parse xp for player = " + player + "ARGS: " + value + "\033[39m");
-                log.info(e.getMessage());
-            }
-            switch (value) {
-                case "miner":
-                    if (block.getType().name().contains("ORE")) {
-                        new Jobsql(log).UpdateXpinJobTable(player.getName(), new Jobsql(log).getColumn(i),
-                                Integer.parseInt(info[i + 1]) + 20);
-                    } else if (block.getType().name() == "COBBLESTONE" || block.getType().name() == "STONE") {
-                        new Jobsql(log).UpdateXpinJobTable(player.getName(), new Jobsql(log).getColumn(i),
-                                Integer.parseInt(info[i + 1]) + 4);
                     }
-                    break;
+                } catch (NumberFormatException e) {
+                }
+                switch (value) {
+                    case "miner":
+                        log.info("IS A MINER");
+                        if (block.getType().name().contains("ORE")) {
+                            new Jobsql(log).AddXp(player.getName(), i, 20, info);
+                        } else if (block.getType().name() == "COBBLESTONE" || block.getType().name() == "STONE"
+                                || block.getType().name() == "GRANITE" || block.getType().name() == "DIORITE"
+                                || block.getType().name() == "ANDESITE") {
+                            new Jobsql(log).AddXp(player.getName(), i, 4, info);
+                        }
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
             i++;
         }

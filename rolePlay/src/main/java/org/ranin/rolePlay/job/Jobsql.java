@@ -17,7 +17,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 
@@ -117,13 +116,13 @@ public class Jobsql {
             res[5] = String.valueOf(rs.getInt("main_hobby_xp"));
             res[6] = rs.getString("second_hobby");
             res[7] = String.valueOf(rs.getInt("second_hobby_xp"));
-            log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
+            // log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
             disconnect();
-            return res;
         } catch (SQLException e) {
             log.warning(
                     "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
             log.info(e.getMessage());
+            res[0] = null;
         }
         disconnect();
         return res;
@@ -148,7 +147,6 @@ public class Jobsql {
     }
 
     public String[] UpdateXpinJobTable(String player, String column, int xp) {
-        log.info("player: " + player + " job: " + column.replace("_xp", "") + " xp: " + xp);
         String[] res = new String[8];
         String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -164,6 +162,16 @@ public class Jobsql {
         }
         disconnect();
         return res;
+    }
+
+    public void AddXp(String player, int i, int j, String[] info) {
+        if (info[i + 1] == null) {
+            // TODO: less xp for not main_job and even less for hobbys ....
+            UpdateXpinJobTable(player, getColumn(i + 1), j);
+        } else {
+            // TODO: less xp for not main_job and even less for hobbys ....
+            UpdateXpinJobTable(player, getColumn(i + 1), Integer.parseInt(info[i + 1]) + j);
+        }
     }
 
     public boolean deletefromJobTable(String player) {

@@ -38,7 +38,12 @@ public class JobCommand implements CommandExecutor {
                     case "main":
                         return switchJobs(args[1], player, "main_job");
                     case "second":
-                        return switchJobs(args[1], player, "second_job");
+                        if (new Jobsql(log).readfromJobTable(player.getName())[0] != null) {
+                            return switchJobs(args[1], player, "second_job");
+                        }
+                        player.sendMessage("§7You have to first declare youre main job\n"
+                                + "Like that:/job main blacksmith/miner\n");
+                        return false;
                     default:
                         player.sendMessage(
                                 "§7Usage:\n/job main/second blacksmith/miner\nlist of all existing Jobs:\nblacksmith,miner, ... ");
