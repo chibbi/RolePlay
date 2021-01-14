@@ -9,7 +9,6 @@ TODO: ["add commands to choose jobs", "work with jobManager, to save all chosen 
 import java.util.Arrays;
 import java.util.logging.Logger;
 import java.util.ArrayList;
-import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -79,7 +78,7 @@ public class HobbyCommand implements CommandExecutor {
     public boolean switchJobs(String arg, Player player, String column) {
         ArrayList<String> alljobs = (ArrayList<String>) jobConfig.getStringList("alljobs");
         for (String job : alljobs) {
-            if(arg == job) {
+            if (arg == job) {
                 new Jobsql(log).UpdateJobinJobTable(player.getName(), column, "blacksmith");
                 return true;
             }

@@ -56,7 +56,7 @@ public class Job {
     }
 
     public void setEffects(Player player, String job, int xp) {
-        log.info("player: " + player + " job: " + job +  " xp: " + xp);
+        log.info("player: " + player + " job: " + job + " xp: " + xp);
         int posAmp = xp;
         ArrayList<String> positives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.positives");
         for (String positive : positives) {
@@ -95,7 +95,7 @@ public class Job {
                 }
                 switch (value) {
                     case "miner":
-                        System.out.println(xpConfig.getList("miner.break.ore"));
+                        System.out.println(xpConfig.getList("miner.break.ore.default"));
                         if (block.getType().name().contains("ORE")) {
                             new Jobsql(log).AddXp(player.getName(), i, xpConfig.getInt("miner.break.ore.default"),
                                     info);
