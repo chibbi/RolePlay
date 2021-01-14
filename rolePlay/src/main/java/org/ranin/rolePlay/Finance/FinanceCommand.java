@@ -1,4 +1,4 @@
-package org.ranin.rolePlay.finance;
+package org.ranin.rolePlay.Finance;
 
 import org.bukkit.entity.Entity;
 
@@ -8,7 +8,11 @@ description: "Commands for Finances"
 TODO: ["think"]
 */
 
+import java.util.Arrays;
 import org.bukkit.entity.Player;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -19,8 +23,7 @@ public class FinanceCommand implements CommandExecutor {
     private Logger log;
 
     public FinanceCommand(Logger logg) {
-        jobConfig = new JobConfig(logg).getCustomConfig();
-        log = logg;
+                log = logg;
     }
 
     @Override

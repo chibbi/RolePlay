@@ -1,4 +1,4 @@
-package org.ranin.rolePlay.finance;
+package org.ranin.rolePlay.Finance;
 
 import java.io.File;
 import java.io.IOException;

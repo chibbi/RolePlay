@@ -1,4 +1,4 @@
-package org.ranin.rolePlay.finance;
+package org.ranin.rolePlay.Finance;
 
 import org.bukkit.entity.Entity;
 
