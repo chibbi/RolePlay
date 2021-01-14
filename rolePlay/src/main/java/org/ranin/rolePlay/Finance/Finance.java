@@ -36,24 +36,28 @@ public class Finance {
     public boolean PlusMoney(int __VALUE, Player owner) {
         // add __VALUE to row `owner`
         // return success or failure
+        return true;
     }
     public boolean MinusMoney(int __VALUE, Player owner) {
         // subtract __VALUE from row `owner`
         // return success or failure
-
+        return true;
     }
     public int GetBalance(Player owner) {
         // return value of row `owner`
+        return 1000000000;
     }
-    public SetBalance(int __VALUE, Player owner) {
+    public void SetBalance(int __VALUE, Player owner) {
         // set balance field of row `owner` to __VALUE
     }
 
     public boolean CreateAccount(Player owner) {
         // if `owner` iselementof table {return false} else {create new row `owner`; SetBalance(DEFAULT, `owner`); return true}
+        return true;
     }
     public boolean RemoveAccount(Player owner) {
         // if `owner`iselementof table {remove row `owner`; return true} else {return false}
+        return true;
     }
 
     // if(PLAYER does JOB_TASK) {PlusMoney(SALARY, PLAYER)}
