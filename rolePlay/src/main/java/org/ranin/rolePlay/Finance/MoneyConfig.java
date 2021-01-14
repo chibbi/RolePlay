@@ -1,10 +1,14 @@
 package org.ranin.rolePlay.Finance;
 
+/*
+author: "chibbi"
+description: "Money Config interface"
+TODO: []
+*/
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
-import java.util.ArrayList;
-
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 

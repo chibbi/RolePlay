@@ -3,7 +3,7 @@ package org.ranin.rolePlay.job;
 import org.bukkit.entity.Entity;
 
 /*
-author: ["chibbi","raninninn"]
+author: "chibbi"
 description: "job class, it is a template for job"
 TODO: ["think"]
 */

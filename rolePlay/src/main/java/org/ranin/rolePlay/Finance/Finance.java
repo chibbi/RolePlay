@@ -1,17 +1,10 @@
 package org.ranin.rolePlay.Finance;
 
-import org.bukkit.entity.Entity;
-
 /*
-author: ["chibbi","raninninn"]
-description: "job class, it is a template for job"
+author: "raninninn"
+description: "finance class, it is a template for job"
 TODO: ["think"]
 */
-
-import org.bukkit.entity.Player;
-import java.util.List;
-import java.util.logging.Logger;
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,6 +12,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Logger;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Entity;
 
 public class Finance {
 
