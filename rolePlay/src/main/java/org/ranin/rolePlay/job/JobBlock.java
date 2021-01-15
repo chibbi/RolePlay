@@ -4,7 +4,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 /*
-author: ["chibbi","raninninn"]
+author: "chibbi"
 description: "job class, it is a template for job"
 TODO: ["think"]
 */

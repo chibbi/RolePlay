@@ -5,6 +5,7 @@ author: chibbi
 description: "Initiator of the whole Plugin"
 TODO: ["add all future classes", "let it do stuff"]
 */
+
 import org.ranin.rolePlay.Finance.FinanceCommand;
 import org.ranin.rolePlay.job.HobbyCommand;
 import org.ranin.rolePlay.job.JobCommand;
