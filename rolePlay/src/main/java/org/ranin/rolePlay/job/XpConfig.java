@@ -1,5 +1,11 @@
 package org.ranin.rolePlay.job;
 
+/*
+author: "chibbi"
+description: "XP Config interface"
+TODO: []
+*/
+
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;

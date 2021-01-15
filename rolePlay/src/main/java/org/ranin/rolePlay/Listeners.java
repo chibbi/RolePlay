@@ -1,7 +1,7 @@
 package org.ranin.rolePlay;
 
 /*
-author: ["chibbi","raninninn"]
+author: "chibbi"
 description: "contains Listeners"
 TODO: ["maybe add GUI to choose jobs"]
 */

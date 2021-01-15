@@ -1,13 +1,12 @@
 package org.ranin.rolePlay;
 
-import org.ranin.rolePlay.job.HobbyCommand;
-
 /*
 author: chibbi
 description: "Initiator of the whole Plugin"
 TODO: ["add all future classes", "let it do stuff"]
 */
-
+import org.ranin.rolePlay.Finance.FinanceCommand;
+import org.ranin.rolePlay.job.HobbyCommand;
 import org.ranin.rolePlay.job.JobCommand;
 import org.ranin.rolePlay.job.JobConfig;
 import org.ranin.rolePlay.job.JobListener;
@@ -33,6 +32,7 @@ public class App extends JavaPlugin {
         // Initiating other Classes
         this.getCommand("job").setExecutor(new JobCommand(getLogger()));
         this.getCommand("hobby").setExecutor(new HobbyCommand(getLogger()));
+        this.getCommand("money").setExecutor(new FinanceCommand(getLogger()));
         this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         getServer().getPluginManager().registerEvents(new Listeners(), this);
         getServer().getPluginManager().registerEvents(new JobListener(getLogger(), config), this);
