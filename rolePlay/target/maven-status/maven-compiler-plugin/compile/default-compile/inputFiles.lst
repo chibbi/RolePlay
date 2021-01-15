@@ -1,15 +1,15 @@
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/Finance.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCrafting.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/XpConfig.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Jobsql.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Listeners.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobListener.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/MoneyConfig.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/KitCommand.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/HobbyCommand.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/App.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Job.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobConfig.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCommand.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/FinanceCommand.java
-/home/ran/Projects/software/java/spigot_rp_plugin/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/Financesql.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/HobbyCommand.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/App.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/Jobsql.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Listeners.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/KitCommand.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobBlock.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/FinanceCommand.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/Finance.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobConfig.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCrafting.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobCommand.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/XpConfig.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/Financesql.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/job/JobListener.java
+/run/media/chibbi/LINUX MINT/GithubRepos/private/RolePlay/rolePlay/src/main/java/org/ranin/rolePlay/Finance/MoneyConfig.java
