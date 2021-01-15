@@ -8,9 +8,11 @@ TODO: ["add Listeners, which start and stop leveling and stuff", "implementing m
 
 import java.util.logging.Logger;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -22,6 +24,7 @@ import org.bukkit.event.inventory.FurnaceExtractEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
 import org.bukkit.event.player.PlayerHarvestBlockEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
@@ -29,29 +32,33 @@ import org.bukkit.event.vehicle.VehicleEnterEvent;
 public class JobListener implements Listener {
 
     private Logger log;
+    private FileConfiguration defaultConfig;
 
-    public JobListener(Logger logg) {
+    public JobListener(Logger logg, FileConfiguration config) {
         log = logg;
+        defaultConfig = config;
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new Job(log).loadEffects(event.getPlayer());
+            new JobBlock(log).loadEffects(event.getPlayer());
         }
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new Jobsql(log).deletefromJobTable(event.getPlayer().getName());
+            if (!defaultConfig.getBoolean("pvpmode")) {
+                new Jobsql(log).deletefromJobTable(event.getPlayer().getName());
+            }
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (event.getEntity().getKiller() instanceof Player) {
-            new Job(log).death(event.getEntity().getKiller(), event.getEntity());
+            new JobBlock(log).killPlayer(event.getEntity().getKiller(), event.getEntity());
         }
         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                 "say " + event.getEntity().getName() + " was slain!");
@@ -59,6 +66,9 @@ public class JobListener implements Listener {
 
     @EventHandler
     public void onMobDeath(EntityDeathEvent event) {
+        if (event.getEntity().getKiller() instanceof Player) {
+            new JobBlock(log).killEntity(event.getEntity().getKiller(), event.getEntity());
+        }
         // https://bukkit.org/threads/custom-mob-drops.465022/
         // should be made here not in Job (for convenience)
     }
@@ -66,7 +76,7 @@ public class JobListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new Job(log).breaks(event.getPlayer(), event.getBlock());
+            new JobBlock(log).breaks(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getPlayer().getName() + " just broke " + event.getBlock().getType() + "!");
         }
@@ -75,9 +85,31 @@ public class JobListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new Job(log).places(event.getPlayer(), event.getBlock());
+            new JobBlock(log).places(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getPlayer().getName() + " just placed a " + event.getBlock().getType() + "!");
+        }
+    }
+
+    @EventHandler
+    public void onHarvest(PlayerHarvestBlockEvent event) {
+        if (event.getPlayer() instanceof Player) {
+            new JobBlock(log).harvests(event.getPlayer(), event.getItemsHarvested());
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
+                    "say " + event.getPlayer().getName() + " just harvested " + event.getItemsHarvested() + "!");
+        }
+    }
+
+    @EventHandler
+    public void onInteract(PlayerInteractEvent event) {
+        // for test if in Water and stuff like that
+        if (event.getPlayer() instanceof Player) {
+            if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                new JobBlock(log).isBreaking(event.getPlayer(), event.getClickedBlock().getType());
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer().getName()
+                        + " is breaking " + event.getClickedBlock().getType() + "!");
+
+            }
         }
     }
 
@@ -85,7 +117,7 @@ public class JobListener implements Listener {
     public void onBlockPlaceOn(BlockCanBuildEvent event) {
         // for test if in Water and stuff like that
         if (event.getPlayer() instanceof Player) {
-            new Job(log).placesOn(event.getPlayer(), event.getBlock());
+            new JobBlock(log).placesOn(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getPlayer().getName() + " places On a " + event.getBlock().getType() + "!");
         }
@@ -94,21 +126,12 @@ public class JobListener implements Listener {
     @EventHandler
     public void onVehicleEnter(VehicleEnterEvent event) {
         if (event.getEntered() instanceof Player) {
-            new Job(log).enters(event.getEntered(), event.getVehicle());
+            new JobBlock(log).enters(event.getEntered(), event.getVehicle());
             // TODO: probably stay here? (should be destroyed and put into the players inv,
             // chance to completle destroy)
             // if player not fisher or messenger or smth like that
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getEntered().getName() + " just entered a " + event.getVehicle().getType() + "!");
-        }
-    }
-
-    @EventHandler
-    public void onHarvest(PlayerHarvestBlockEvent event) {
-        if (event.getPlayer() instanceof Player) {
-            new Job(log).harvests(event.getPlayer(), event.getItemsHarvested());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just harvested " + event.getItemsHarvested() + "!");
         }
     }
 

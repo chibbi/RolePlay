@@ -11,7 +11,6 @@ sources:
 */
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -19,7 +18,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
-
 
 import org.bukkit.Bukkit;
 
@@ -124,9 +122,10 @@ public class Jobsql {
             // log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
             disconnect();
         } catch (SQLException e) {
-            //log.warning(
-            //        "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
-            //log.info(e.getMessage());
+            // log.warning(
+            // "\033[31mCould not read Job Table at player = " + player + " on " + dbname +
+            // " database\033[39m");
+            // log.info(e.getMessage());
             res[0] = null;
         }
         disconnect();
@@ -196,8 +195,7 @@ public class Jobsql {
     }
 
     public String getUuid(String player) {
-        return(player);
-
+        return (player);
     }
 
     public String getColumn(int i) {

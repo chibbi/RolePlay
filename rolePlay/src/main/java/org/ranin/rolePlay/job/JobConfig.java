@@ -28,21 +28,6 @@ public class JobConfig {
                 log.info(e.getMessage());
             }
             ArrayList<String> list = new ArrayList<String>();
-            list.add("miner");
-            list.add("farmer");
-            list.add("lumberjack");
-            list.add("builder");
-            list.add("fisherman");
-            list.add("hunter");
-            list.add("warrior");
-            list.add("knight");
-            list.add("assassin");
-            list.add("messenger");
-            list.add("merchant");
-            list.add("painter");
-            list.add("stonemason");
-            list.add("blacksmith");
-            cusconf.set("alljobs", list);
             cusconf.set("miner", true);
             cusconf.set("farmer", true);
             cusconf.set("lumberjack", true);

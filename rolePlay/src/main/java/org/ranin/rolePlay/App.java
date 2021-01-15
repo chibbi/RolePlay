@@ -1,5 +1,7 @@
 package org.ranin.rolePlay;
 
+import org.ranin.rolePlay.job.HobbyCommand;
+
 /*
 author: chibbi
 description: "Initiator of the whole Plugin"
@@ -22,6 +24,7 @@ public class App extends JavaPlugin {
     public void onEnable() {
         config = getConfig();
         config.addDefault("imperatormode", true);
+        config.addDefault("pvpmode", false);
         config.options().copyDefaults(true);
         saveConfig();
         new JobConfig(getLogger()).getCustomConfig();
@@ -29,10 +32,10 @@ public class App extends JavaPlugin {
         new Jobsql(getLogger()).createJobTable();
         // Initiating other Classes
         this.getCommand("job").setExecutor(new JobCommand(getLogger()));
-        //this.getCommand("hobby").setExecutor(new HobbyCommand(getLogger()));
+        this.getCommand("hobby").setExecutor(new HobbyCommand(getLogger()));
         this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         getServer().getPluginManager().registerEvents(new Listeners(), this);
-        getServer().getPluginManager().registerEvents(new JobListener(getLogger()), this);
+        getServer().getPluginManager().registerEvents(new JobListener(getLogger(), config), this);
         getLogger().info("Hello, SpigotMC!");
     }
 

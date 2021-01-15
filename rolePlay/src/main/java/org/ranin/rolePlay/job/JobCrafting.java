@@ -21,10 +21,12 @@ public class JobCrafting {
 
     private Logger log;
 
-    public FileConfiguration config;
+    private FileConfiguration jobConfig;
+    private FileConfiguration xpConfig;
 
     public JobCrafting(Logger logg) {
-        config = new JobConfig(logg).getCustomConfig();
+        jobConfig = new JobConfig(logg).getCustomConfig();
+        xpConfig = new XpConfig(logg).getCustomConfig();
         log = logg;
     }
 
@@ -34,6 +36,26 @@ public class JobCrafting {
 
     public void crafts(HumanEntity whoClicked, ItemStack result) {
         String[] info = new Jobsql(log).readfromJobTable(whoClicked.getName());
+        int i = 0;
+        for (String value : info) {
+            if (value == null) {
+            } else {
+                try {
+                    if (i % 2 == 0) {
+                        for (String keys : xpConfig.getKeys(true)) {
+                            String[] singleKeys = keys.split("\\.");
+                            if (singleKeys.length == 4 && singleKeys[1].equals("craft")) {
+                                if (singleKeys[3].equals(result.getType().name())) {
+                                    new Jobsql(log).AddXp(whoClicked.getName(), i, xpConfig.getInt(keys), info);
+                                }
+                            }
+                        }
+                    }
+                } catch (NumberFormatException e) {
+                }
+            }
+            i++;
+        }
     }
 
     public void cooks(Player player, Material material) {
