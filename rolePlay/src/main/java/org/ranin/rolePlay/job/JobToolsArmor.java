@@ -2,14 +2,13 @@ package org.ranin.rolePlay.job;
 
 /*
 author: "chibbi"
-description: "job class, it is a template for job"
+description: "starting/should to get a file with all functions that don't quite fit into other categories"
 TODO: ["think"]
 */
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import java.util.logging.Logger;
-
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -18,10 +17,12 @@ public class JobToolsArmor {
 
     private FileConfiguration jobConfig;
     private FileConfiguration xpConfig;
+    private FileConfiguration interactConfig;
 
     public JobToolsArmor(Logger logg) {
         jobConfig = new JobConfig(logg).getCustomConfig();
         xpConfig = new XpConfig(logg).getCustomConfig();
+        interactConfig = new InteractConfig(logg).getCustomConfig();
         log = logg;
     }
 
@@ -29,7 +30,7 @@ public class JobToolsArmor {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
         boolean allowedMain = false;
         boolean allowedOff = false;
-        for (String keys : xpConfig.getKeys(true)) {
+        for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && !singleKeys[1].equals("allowedTools") && singleKeys[0].equals(info[0])) {
                 if (singleKeys[3].equals(player.getInventory().getItemInMainHand().getType().name())) {
@@ -49,14 +50,12 @@ public class JobToolsArmor {
             ItemStack items = new ItemStack(Material.COBBLESTONE);
             items.setAmount(1);
             player.getInventory().setItemInOffHand(items);
-        } else {
-
         }
     }
 
     public void isInteracting(Player player, Material type) {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
-        for (String keys : xpConfig.getKeys(true)) {
+        for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && singleKeys[1].equals("deniedTools") && singleKeys[0].equals(info[0])) {
                 if (singleKeys[3].equals(player.getInventory().getItemInMainHand().getType().name())) {
@@ -70,7 +69,6 @@ public class JobToolsArmor {
                 }
             }
         }
-
     }
 
 }

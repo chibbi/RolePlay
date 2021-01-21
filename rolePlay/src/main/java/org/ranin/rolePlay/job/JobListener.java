@@ -42,6 +42,10 @@ public class JobListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         if (event.getPlayer() instanceof Player) {
+            String[] info = new Jobsql(log).readfromJobTable(event.getPlayer().getName());
+            if (info[0] == null) {
+                event.getPlayer().sendMessage("§6EY JOOOOO \nPlease choose a job (§7/job help§6)");
+            }
             new JobBlock(log).loadEffects(event.getPlayer());
         }
     }

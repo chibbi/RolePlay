@@ -43,10 +43,12 @@ public class JobCrafting {
 
     private FileConfiguration jobConfig;
     private FileConfiguration xpConfig;
+    private FileConfiguration interactConfig;
 
     public JobCrafting(Logger logg) {
         jobConfig = new JobConfig(logg).getCustomConfig();
         xpConfig = new XpConfig(logg).getCustomConfig();
+        interactConfig = new InteractConfig(logg).getCustomConfig();
         log = logg;
     }
 
@@ -58,7 +60,7 @@ public class JobCrafting {
         ItemStack result = event.getRecipe().getResult();
         String[] info = new Jobsql(log).readfromJobTable(event.getWhoClicked().getName());
         boolean allowed = true;
-        for (String keys : xpConfig.getKeys(true)) {
+        for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && singleKeys[1].equals("denyCraft") && singleKeys[0].equals(info[0])) {
                 if (result.getType().name().contains(singleKeys[3])) {
@@ -67,7 +69,7 @@ public class JobCrafting {
                 }
             }
         }
-        for (String keys : xpConfig.getKeys(true)) {
+        for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && singleKeys[1].equals("allowCraft") && singleKeys[0].equals(info[0])) {
                 if (result.getType().name().contains(singleKeys[3])) {
@@ -75,6 +77,11 @@ public class JobCrafting {
                     allowed = true;
                 }
             }
+        }
+        if (info[0] == null) {
+            event.getWhoClicked().sendMessage("§6EY JOOOOO \nPlease choose a job (§7/job help§6)");
+            event.setCancelled(true);
+            return;
         }
         if (!allowed) {
             if (new Random().nextInt(10 - 1 + 1) + 1 >= 5) {

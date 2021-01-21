@@ -7,13 +7,18 @@ TODO: ["add all future classes", "let it do stuff"]
 */
 
 import org.ranin.rolePlay.Finance.FinanceCommand;
+import org.ranin.rolePlay.job.InteractConfig;
+import org.ranin.rolePlay.job.JobBlock;
 import org.ranin.rolePlay.job.JobCommand;
 import org.ranin.rolePlay.job.JobConfig;
 import org.ranin.rolePlay.job.XpConfig;
 import org.ranin.rolePlay.job.Jobsql;
 import org.ranin.rolePlay.job.JobListener;
+import org.ranin.rolePlay.job.JobToolsArmor;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class App extends JavaPlugin {
 
@@ -29,6 +34,7 @@ public class App extends JavaPlugin {
         // Initiating other Classes
         new JobConfig(getLogger()).getCustomConfig();
         new XpConfig(getLogger()).getCustomConfig();
+        new InteractConfig(getLogger()).getCustomConfig();
         new Jobsql(getLogger()).createJobTable();
         this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         this.getCommand("job").setExecutor(new JobCommand(getLogger(), getConfig()));
@@ -36,6 +42,22 @@ public class App extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Listeners(), this);
         getServer().getPluginManager().registerEvents(new JobListener(getLogger(), config), this);
         getLogger().info("Hello, SpigotMC!");
+        getLogger().info(Bukkit.getWorlds().toString());
+        startScheduler();
+
+    }
+
+    public int id = 1;
+
+    public void startScheduler() {
+        Bukkit.getServer().getScheduler().runTaskTimer(this, new Runnable() {
+            @Override
+            public void run() {
+                new JobBlock(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world"));
+                new JobBlock(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world_nether"));
+                new JobBlock(getLogger()).giveNearbyReg(Bukkit.getWorld("world"));
+            }
+        }, 60L, 60L);
     }
 
     @Override

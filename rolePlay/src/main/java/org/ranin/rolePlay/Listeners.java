@@ -24,5 +24,6 @@ public class Listeners implements Listener {
         }
         event.setJoinMessage("Welcome, " + event.getPlayer().getName() + "!");
         event.setJoinMessage("Quick Reminder, if you change your Username, you loose all your xp and money!");
+        event.setJoinMessage("If you have any issues or find bugs, don't hesitate, and contact an admin or a mod!");
     }
 }
