@@ -3,14 +3,14 @@ RolePlay is a Spigot plugin that adds skill trees, classes that you have to comm
 It currently let's you choose one job, in which you specialize, and you depend on others to have different jobs, to be able to progress.  
 #### USES JRE 11  
 
-## May rewrite all Listeners, because i forgot, you could cancel events
-## Needs a wiki  
+#### May rewrite all Listeners, because i forgot, you could cancel events
+#### Needs a wiki  
   
 ## Possibilities:
 #### config/defaultconfig:
 pvpmode: if enabled (true) you don't loose your xp and jobs on a kill
 imperatormode: should always stay true
-#### Jobconfig:
+#### job.yml:
 ```
 JOBNAME:
   effects:
@@ -25,7 +25,7 @@ POSITIVE EFFECTS: positive potion effects
 NEGATIVE EFFECTS: negative potion effects  
 just rename everything that is in caps to your liking.  
 you can find [all possible effects here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/potion/PotionEffectType.html)
-#### Xpconfig:
+#### xp.yml:
 ```
 JOBNAME:
   break:
@@ -58,7 +58,7 @@ BLOCK: your desired BLOCK
 ITEM: your desired ITEM  
 XP: the amount of XP (int) the job should get, per break or place of the BLOCK  
 the kill section, lets you configure, that the job, it is a part of, can get (or loose with negative int) when he kills someone part of the given JOBNAME  
-  
+#### interact.yml:
 ```
 JOBNAME:
   allowedTools:
