@@ -15,8 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
-
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.potion.PotionEffect;
@@ -39,6 +37,7 @@ public class JobBlock {
         if (amplifier <= 0 || potion == null) {
         } else {
             player.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE, amplifier));
+            player.sendMessage("Gave effect: " + potion.getName() + " strength: " + amplifier);
         }
     }
 
@@ -50,17 +49,15 @@ public class JobBlock {
         } else {
             for (PotionEffect eff : player.getActivePotionEffects()) {
                 player.removePotionEffect(eff.getType());
+                player.sendMessage("Deactivated effect: " + eff.getType().getName());
             }
             setEffects(player, info[0], (Integer.parseInt(info[1])));
-            setEffects(player, info[2], (Integer.parseInt(info[3])));
-            setEffects(player, info[4], (Integer.parseInt(info[5])));
-            setEffects(player, info[6], (Integer.parseInt(info[7])));
         }
     }
 
     public void setEffects(Player player, String job, int xp) {
         log.info("player: " + player + " job: " + job + " xp: " + xp);
-        int posAmp = xp;
+        int posAmp = xp / 1000;
         ArrayList<String> positives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.positives");
         for (String positive : positives) {
             if (positive.strip() == "" || positive == null || positive == "TEMPLATE") {
@@ -68,7 +65,7 @@ public class JobBlock {
             }
             giveEffect(player, PotionEffectType.getByName(positive), posAmp);
         }
-        int negAmp = xp / 2;
+        int negAmp = xp / 2000;
         ArrayList<String> negatives = (ArrayList<String>) jobConfig.getStringList(job + ".effects.negatives");
         for (String negative : negatives) {
             if (negative.strip() == "" || negative == null || negative == "TEMPLATE") {
@@ -81,38 +78,13 @@ public class JobBlock {
     public void killPlayer(Player killer, Player dead) {
         String[] infKiller = new Jobsql(log).readfromJobTable(killer.getName());
         String[] infDead = new Jobsql(log).readfromJobTable(dead.getName());
-        int i = 0;
-        for (String killValue : infKiller) {
-            if (killValue == null) {
-            } else {
-                try {
-                    if (i % 2 == 0) {
-                        for (String keys : xpConfig.getKeys(true)) {
-                            String[] singleKeys = keys.split("\\.");
-                            if (singleKeys.length == 4 && singleKeys[1].equals("playerkill")) {
-                                int j = 0;
-                                for (String deadValue : infDead) {
-                                    if (deadValue == null) {
-                                    } else {
-                                        try {
-                                            if (i % 2 == 0) {
-                                                if (singleKeys[3].equals(deadValue)) {
-                                                    new Jobsql(log).AddXp(killer.getName(), j, xpConfig.getInt(keys),
-                                                            infKiller);
-                                                }
-                                            }
-                                        } catch (NumberFormatException e) {
-                                        }
-                                    }
-                                    j++;
-                                }
-                            }
-                        }
-                    }
-                } catch (NumberFormatException e) {
+        for (String keys : xpConfig.getKeys(true)) {
+            String[] singleKeys = keys.split("\\.");
+            if (singleKeys.length == 4 && singleKeys[1].equals("playerkill") && singleKeys[0].equals(infKiller[0])) {
+                if (singleKeys[3].equals(infDead[0])) {
+                    new Jobsql(log).AddXp(killer.getName(), Integer.parseInt(infKiller[1]) + xpConfig.getInt(keys));
                 }
             }
-            i++;
         }
     }
 
@@ -130,17 +102,7 @@ public class JobBlock {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
     }
 
-    public void harvests(Player player, List<ItemStack> itemsHarvested) {
-        String[] info = new Jobsql(log).readfromJobTable(player.getName());
-        log.info(itemsHarvested.get(0).getType().name());
-        parseXp(info, player, itemsHarvested.get(0).getType().name(), "craft");
-    }
-
     public void enters(Entity entered, Vehicle vehicle) {
-    }
-
-    public void isBreaking(Player player, Material type) {
-        String[] info = new Jobsql(log).readfromJobTable(player.getName());
     }
 
     public void killEntity(Player player, LivingEntity entity) {
@@ -149,25 +111,15 @@ public class JobBlock {
     }
 
     public void parseXp(String[] info, Player player, String equal, String what) {
-        int i = 0;
-        for (String value : info) {
-            if (value == null) {
-            } else {
-                try {
-                    if (i % 2 == 0) {
-                        for (String keys : xpConfig.getKeys(true)) {
-                            String[] singleKeys = keys.split("\\.");
-                            if (singleKeys.length == 4 && singleKeys[1].equals(what)) {
-                                if (singleKeys[3].equals(equal)) {
-                                    new Jobsql(log).AddXp(player.getName(), i, xpConfig.getInt(keys), info);
-                                }
-                            }
-                        }
-                    }
-                } catch (NumberFormatException e) {
+        for (String keys : xpConfig.getKeys(true)) {
+            String[] singleKeys = keys.split("\\.");
+            if (singleKeys.length == 4 && singleKeys[1].equals(what) && singleKeys[0].equals(info[0])) {
+                if (singleKeys[3].equals(equal)) {
+                    new Jobsql(log).AddXp(player.getName(), Integer.parseInt(info[1]) + xpConfig.getInt(keys));
+                } else {
+
                 }
             }
-            i++;
         }
     }
 

@@ -67,10 +67,13 @@ public class JobListener implements Listener {
     @EventHandler
     public void onMobDeath(EntityDeathEvent event) {
         if (event.getEntity().getKiller() instanceof Player) {
+            // TODO: maybe disAllow kills of certain kinds, from certain professions????
+            // https://bukkit.org/threads/custom-mob-drops.465022/
+            // should be made here not in Job (for convenience)
             new JobBlock(log).killEntity(event.getEntity().getKiller(), event.getEntity());
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say "
+                    + event.getEntity().getKiller().getName() + " killed a poor " + event.getEntity().getName() + "!");
         }
-        // https://bukkit.org/threads/custom-mob-drops.465022/
-        // should be made here not in Job (for convenience)
     }
 
     @EventHandler
@@ -87,14 +90,20 @@ public class JobListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             new JobBlock(log).places(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just placed a " + event.getBlock().getType() + "!");
+                    "say " + event.getPlayer().getName() + " just placed " + event.getBlock().getType() + "!");
         }
     }
 
     @EventHandler
     public void onHarvest(PlayerHarvestBlockEvent event) {
+        String[] info = new Jobsql(log).readfromJobTable(event.getPlayer().getName());
         if (event.getPlayer() instanceof Player) {
-            new JobBlock(log).harvests(event.getPlayer(), event.getItemsHarvested());
+            if (info[0] != "farmer") {
+                // TODO: implement something, which denys harvesting
+                // ( or just drop a shitton of stuff to a farmer if hes a farmer xD?)
+                // isCancelled seems not to work and getDrops doens't exist, maybe you'll find
+                // something in the Doc?
+            }
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
                     "say " + event.getPlayer().getName() + " just harvested " + event.getItemsHarvested() + "!");
         }
@@ -105,7 +114,12 @@ public class JobListener implements Listener {
         // for test if in Water and stuff like that
         if (event.getPlayer() instanceof Player) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                new JobBlock(log).isBreaking(event.getPlayer(), event.getClickedBlock().getType());
+                new JobToolsArmor(log).isInteracting(event.getPlayer(), event.getClickedBlock().getType());
+                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer().getName()
+                        + " is interacting with " + event.getClickedBlock().getType() + "!");
+
+            } else if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
+                new JobToolsArmor(log).isBreaking(event.getPlayer(), event.getClickedBlock().getType());
                 Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer().getName()
                         + " is breaking " + event.getClickedBlock().getType() + "!");
 
@@ -119,7 +133,7 @@ public class JobListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             new JobBlock(log).placesOn(event.getPlayer(), event.getBlock());
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " places On a " + event.getBlock().getType() + "!");
+                    "say " + event.getPlayer().getName() + " places On " + event.getBlock().getType() + "!");
         }
     }
 
@@ -131,7 +145,7 @@ public class JobListener implements Listener {
             // chance to completle destroy)
             // if player not fisher or messenger or smth like that
             Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getEntered().getName() + " just entered a " + event.getVehicle().getType() + "!");
+                    "say " + event.getEntered().getName() + " just entered " + event.getVehicle().getType() + "!");
         }
     }
 
@@ -159,21 +173,21 @@ public class JobListener implements Listener {
     @EventHandler
     public void onEnchant(EnchantItemEvent event) {
         if (event.getEnchanter() instanceof Player) {
-            new JobCrafting(log).enchants(event.getEnchanter(), event.getEnchantsToAdd());
+            new JobCrafting(log).enchants(event);
             // TODO: add, that warrior automatically gets smite and ban of arthorods ... on
             // his swords he crafts
             // TODO: add lumberjack auto effiecency on axe
             // TODO: add miner auto effiecency on pickaxe (haste to?? or only hast?)
             // TODO: think about the rest of the classes
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getEnchanter().getName() + " just crafted " + event.getEnchantsToAdd() + "!");
+            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getEnchanter().getName()
+                    + " just enchanted" + event.getItem() + " with " + event.getEnchantsToAdd() + "!");
         }
     }
 
     @EventHandler
     public void onCraft(CraftItemEvent event) {
         if (event.getWhoClicked() instanceof Player) {
-            new JobCrafting(log).crafts(event.getWhoClicked(), event.getRecipe().getResult());
+            new JobCrafting(log).crafts(event);
             // TODO: add, that warrior automatically gets smite and ban of arthorods ... on
             // his swords he crafts
             // TODO: add lumberjack auto effiecency on axe

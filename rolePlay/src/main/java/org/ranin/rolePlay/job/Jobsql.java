@@ -72,9 +72,8 @@ public class Jobsql {
 
     public boolean createJobTable() {
         String sql = "CREATE TABLE IF NOT EXISTS " + dbname + " (\n" + "  player_id integer PRIMARY KEY,\n"
-                + " player text NOT NULL UNIQUE,\n" + "    main_job text NOT NULL,\n" + "    main_job_xp integer,\n"
-                + "    second_job text,\n" + "    second_job_xp integer,\n" + "    main_hobby text,\n"
-                + "    main_hobby_xp integer,\n" + "    second_hobby text,\n" + "    second_hobby_xp integer\n" + ");";
+                + " player text NOT NULL UNIQUE,\n" + "    main_job text NOT NULL,\n" + "    main_job_xp integer\n"
+                + ");";
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
@@ -88,8 +87,8 @@ public class Jobsql {
         return false;
     }
 
-    public boolean addtoJobTable(String player, String column, String job) {
-        String sql = "INSERT INTO " + dbname + "(player," + column + ") VALUES(?,?);";
+    public boolean addtoJobTable(String player, String job) {
+        String sql = "INSERT INTO " + dbname + "(player,main_job) VALUES(?,?);";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, getUuid(player));
             pstmt.setString(2, job);
@@ -113,12 +112,6 @@ public class Jobsql {
             ResultSet rs = pstmt.executeQuery();
             res[0] = rs.getString("main_job");
             res[1] = String.valueOf(rs.getInt("main_job_xp"));
-            res[2] = rs.getString("second_job");
-            res[3] = String.valueOf(rs.getInt("second_job_xp"));
-            res[4] = rs.getString("main_hobby");
-            res[5] = String.valueOf(rs.getInt("main_hobby_xp"));
-            res[6] = rs.getString("second_hobby");
-            res[7] = String.valueOf(rs.getInt("second_hobby_xp"));
             // log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
             disconnect();
         } catch (SQLException e) {
@@ -132,51 +125,39 @@ public class Jobsql {
         return res;
     }
 
-    public String[] UpdateJobinJobTable(String player, String column, String job) {
-        String[] res = new String[8];
-        String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
+    public void UpdateJobinJobTable(String player, String job) {
+        String sql = "UPDATE " + dbname + " SET main_job = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, job);
             pstmt.setString(2, getUuid(player));
             pstmt.executeUpdate();
             disconnect();
-            return res;
         } catch (SQLException e) {
             log.warning(
                     "\033[31mCould not read Job Table at player = " + player + " on " + dbname + " database\033[39m");
             log.info(e.getMessage());
         }
         disconnect();
-        return res;
     }
 
-    public String[] UpdateXpinJobTable(String player, String column, int xp) {
-        String[] res = new String[8];
-        String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
+    public void UpdateXpinJobTable(String player, int xp) {
+        String sql = "UPDATE " + dbname + " SET main_job_xp = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, xp);
             pstmt.setString(2, getUuid(player));
             pstmt.executeUpdate();
             disconnect();
-            return res;
         } catch (SQLException e) {
             log.warning("\033[31mCould not update Xp in Jobtable at player = " + player + " on " + dbname
                     + " database\033[39m");
             log.info(e.getMessage());
         }
         disconnect();
-        return res;
     }
 
-    public void AddXp(String player, int i, int j, String[] info) {
+    public void AddXp(String player, int i) {
         player = getUuid(player);
-        if (info[i + 1] == null) {
-            // TODO: less xp for not main_job and even less for hobbys ....
-            UpdateXpinJobTable(player, getColumn(i + 1), j);
-        } else {
-            // TODO: less xp for not main_job and even less for hobbys ....
-            UpdateXpinJobTable(player, getColumn(i + 1), Integer.parseInt(info[i + 1]) + j);
-        }
+        UpdateXpinJobTable(player, i);
     }
 
     public boolean deletefromJobTable(String player) {
@@ -204,18 +185,6 @@ public class Jobsql {
                 return "main_job";
             case 1:
                 return "main_job_xp";
-            case 2:
-                return "second_job";
-            case 3:
-                return "second_job_xp";
-            case 4:
-                return "main_hobby";
-            case 5:
-                return "main_hobby_xp";
-            case 6:
-                return "second_hobby";
-            case 7:
-                return "second_hobby_xp";
             default:
                 return "ERROR in getColumn(" + i + ")";
         }

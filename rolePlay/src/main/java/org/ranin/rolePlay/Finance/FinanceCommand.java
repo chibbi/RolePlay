@@ -33,6 +33,7 @@ public class FinanceCommand implements CommandExecutor {
                 player.sendMessage("§6You first have to specify, if you want to transfer,  withdraw or deposit money.\n"
                         + "E.g.\n§7/money deposit VALUE\n§6");
                 log.info(player.getName() + " forgot Arguments: " + Arrays.toString(args));
+                return false;
             }
         } else {
             if (sender instanceof Player) {
@@ -46,24 +47,32 @@ public class FinanceCommand implements CommandExecutor {
                         return true;
                     } else if (args[0] == "balance") {
                         // TODO get balance from row of player
+                        return true;
                     }
                 } else {
                     switch (args[0]) {
                         case "add":
                             // TODO add args[1] to row of player
+                            return true;
                         case "set":
                             // TODO set args[1] for row of player
+                            return true;
                         case "transfer":
                             // TODO add args[1] to row of args[2], subtract args[1] from row of player
+                            return true;
                         case "create-account":
                             // TODO add args[1] to account table
+                            return true;
                         case "remove-account":
                             // TODO remove args[1] from account table
+                            return true;
                         case "reset-account":
                             // TODO set all values of row args[1] to defaults
+                            return true;
                         default:
                             player.sendMessage("§6Usage:\n§7/money COMMAND ARG1 (ARG2)\n§6§7/finance help for help");
                             log.info(player.getName() + " tried: " + Arrays.toString(args));
+                            return false;
                     }
                 }
             } else {

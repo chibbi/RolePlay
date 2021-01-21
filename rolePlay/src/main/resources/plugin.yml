@@ -1,6 +1,6 @@
 main: org.ranin.rolePlay.App
 name: "rolePlay"
-version: 0.4.0
+version: 0.5.0
 api-version: 1.16
 authors: ["chibbi", "raninninn"]
 description: "An exhaustive plugin to make roleplay servers even more enjoyable and challengin."
@@ -12,16 +12,16 @@ commands:
    job:
       description: "lets you choose your job"
       permission: rolePlay.job
-   hobby:
-      description: "lets you choose your job"
-      permission: rolePlay.hobby
+   money:
+      description: "lets you manage your finances"
+      permission: rolePlay.money
 permissions:
    rolePlay.kit:
       description: Permission for the /kit command
       default: op
    rolePlay.job:
-      description: Permission for the /kit command
+      description: Permission for the /job command
       default: true
-   rolePlay.hobby:
-      description: Permission for the /kit command
+   rolePlay.money:
+      description: Permission for the /money command
       default: true

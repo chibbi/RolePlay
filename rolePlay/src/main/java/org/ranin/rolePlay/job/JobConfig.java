@@ -33,6 +33,7 @@ public class JobConfig {
                 log.info(e.getMessage());
             }
             ArrayList<String> list = new ArrayList<String>();
+            cusconf.set("mage", true);
             cusconf.set("miner", true);
             cusconf.set("farmer", true);
             cusconf.set("lumberjack", true);
