@@ -2,7 +2,9 @@ Code:
  - General:
    - [ ] change all text outputs to be configured by a yml file, so that they are not hardcoded
  - Job System:
-   - [ ] 
+   - [ ] make the hunter the only one who gets a good amount (normal amount) of flesh by hunting. others should only get flesh on every third animal or smth like that => already know everything
+   - [ ] do the same for farmers, because thats not yet implemented => need more knowledge
+   - [ ] look at configurations, is it uniform (is a blacksmith really the only one who can craft his stuff)
  - Finance System:
    - [ ] Edit this Readme
    - [ ] Work on it?
