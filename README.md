@@ -6,7 +6,7 @@ It currently let's you choose one job, in which you specialize, and you depend o
   
 ##### For more information, you can look into [the wiki](https://github.com/chibbi/RolePlay/wiki)
   
-you can find [all possible Materials (Blocks and Items) here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)
+you can find [all possible Materials (Blocks and Items) here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)  
 you can find [all possible Effects/Potions here.](https://github.com/chibbi/RolePlay/wiki/Effects-Potions)
 
 ## Contributors:
