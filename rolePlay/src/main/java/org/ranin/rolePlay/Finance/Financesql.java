@@ -85,8 +85,8 @@ public class Financesql {
         return false;
     }
 
-    public boolean addtoAccountTable(String player, String column, Integer balance, Boolean banker) {
-        String sql = "INSERT INTO " + dbname + "(player," + column + ") VALUES(?,?);";
+    public boolean addtoAccountTable(String player, Integer balance, Boolean banker) {
+        String sql = "INSERT INTO " + dbname + "(player, balance, banker) VALUES(?,?,?);";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, getUuid(player));
             pstmt.setInt(2, balance);
@@ -114,18 +114,15 @@ public class Financesql {
             // log.info("\033[31m INFO: " + Arrays.toString(res) + "\033[39m");
             disconnect();
         } catch (SQLException e) {
-            //log.warning(
-            //        "\033[31mCould not read Account Table at player = " + player + " on " + dbname + " database\033[39m");
-            //log.info(e.getMessage());
             res[0] = null;
         }
         disconnect();
         return res;
     }
 
-    public String[] UpdateAccountinAccountTable(String player, String column, Integer balance) {
+    public String[] UpdateAccountinAccountTable(String player, Integer balance) {
         String[] res = new String[8];
-        String sql = "UPDATE " + dbname + " SET " + column + " = ? WHERE player=?;";
+        String sql = "UPDATE " + dbname + " SET = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, balance);
             pstmt.setString(2, getUuid(player));
