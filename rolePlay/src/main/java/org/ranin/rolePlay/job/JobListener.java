@@ -64,8 +64,6 @@ public class JobListener implements Listener {
         if (event.getEntity().getKiller() instanceof Player) {
             new JobBlock(log).killPlayer(event.getEntity().getKiller(), event.getEntity());
         }
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                "say " + event.getEntity().getName() + " was slain!");
     }
 
     @EventHandler
@@ -75,8 +73,6 @@ public class JobListener implements Listener {
             // https://bukkit.org/threads/custom-mob-drops.465022/
             // should be made here not in Job (for convenience)
             new JobBlock(log).killEntity(event.getEntity().getKiller(), event.getEntity());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say "
-                    + event.getEntity().getKiller().getName() + " killed a poor " + event.getEntity().getName() + "!");
         }
     }
 
@@ -84,8 +80,6 @@ public class JobListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getPlayer() instanceof Player) {
             new JobBlock(log).breaks(event.getPlayer(), event.getBlock());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just broke " + event.getBlock().getType() + "!");
         }
     }
 
@@ -93,8 +87,6 @@ public class JobListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         if (event.getPlayer() instanceof Player) {
             new JobBlock(log).places(event.getPlayer(), event.getBlock());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just placed " + event.getBlock().getType() + "!");
         }
     }
 
@@ -108,8 +100,6 @@ public class JobListener implements Listener {
                 // isCancelled seems not to work and getDrops doens't exist, maybe you'll find
                 // something in the Doc?
             }
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " just harvested " + event.getItemsHarvested() + "!");
         }
     }
 
@@ -119,14 +109,8 @@ public class JobListener implements Listener {
         if (event.getPlayer() instanceof Player) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                 new JobToolsArmor(log).isInteracting(event.getPlayer(), event.getClickedBlock().getType());
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer().getName()
-                        + " is interacting with " + event.getClickedBlock().getType() + "!");
-
             } else if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
                 new JobToolsArmor(log).isBreaking(event.getPlayer(), event.getClickedBlock().getType());
-                Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer().getName()
-                        + " is breaking " + event.getClickedBlock().getType() + "!");
-
             }
         }
     }
@@ -136,8 +120,6 @@ public class JobListener implements Listener {
         // for test if in Water and stuff like that
         if (event.getPlayer() instanceof Player) {
             new JobBlock(log).placesOn(event.getPlayer(), event.getBlock());
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getPlayer().getName() + " places On " + event.getBlock().getType() + "!");
         }
     }
 
@@ -148,30 +130,22 @@ public class JobListener implements Listener {
             // TODO: probably stay here? (should be destroyed and put into the players inv,
             // chance to completle destroy)
             // if player not fisher or messenger or smth like that
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getEntered().getName() + " just entered " + event.getVehicle().getType() + "!");
         }
     }
 
     @EventHandler
     public void onCook(FurnaceExtractEvent event) {
         new JobCrafting(log).cooks(event.getPlayer(), event.getItemType());
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getPlayer() + " just got "
-                + event.getItemType() + " out of " + event.getBlock().getType() + "!");
     }
 
     @EventHandler
     public void onSmithing(PrepareSmithingEvent event) {
         new JobCrafting(log).smithing(event.getView().getPlayer(), event.getResult());
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                "say " + event.getView().getPlayer() + " just cooked " + event.getResult() + "!");
     }
 
     @EventHandler
     public void onAnvil(PrepareAnvilEvent event) {
         new JobCrafting(log).anviling(event.getView().getPlayer(), event.getResult());
-        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                "say " + event.getView().getPlayer() + " just cooked " + event.getResult() + "!");
     }
 
     @EventHandler
@@ -183,8 +157,6 @@ public class JobListener implements Listener {
             // TODO: add lumberjack auto effiecency on axe
             // TODO: add miner auto effiecency on pickaxe (haste to?? or only hast?)
             // TODO: think about the rest of the classes
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "say " + event.getEnchanter().getName()
-                    + " just enchanted" + event.getItem() + " with " + event.getEnchantsToAdd() + "!");
         }
     }
 
@@ -197,8 +169,6 @@ public class JobListener implements Listener {
             // TODO: add lumberjack auto effiecency on axe
             // TODO: add miner auto effiecency on pickaxe (haste to?? or only hast?)
             // TODO: think about the rest of the classes
-            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(),
-                    "say " + event.getWhoClicked().getName() + " just crafted " + event.getRecipe().getResult() + "!");
         }
     }
 }
