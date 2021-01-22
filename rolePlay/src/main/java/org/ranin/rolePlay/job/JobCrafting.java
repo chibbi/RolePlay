@@ -64,7 +64,6 @@ public class JobCrafting {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && singleKeys[1].equals("denyCraft") && singleKeys[0].equals(info[0])) {
                 if (result.getType().name().contains(singleKeys[3])) {
-                    log.info(singleKeys[3] + " DISALLOWED: " + result.getType().name());
                     allowed = false;
                 }
             }
@@ -73,7 +72,6 @@ public class JobCrafting {
             String[] singleKeys = keys.split("\\.");
             if (singleKeys.length == 4 && singleKeys[1].equals("allowCraft") && singleKeys[0].equals(info[0])) {
                 if (result.getType().name().contains(singleKeys[3])) {
-                    log.info(singleKeys[3] + " ALLOWED: " + result.getType().name());
                     allowed = true;
                 }
             }

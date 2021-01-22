@@ -29,30 +29,27 @@ public class Finance {
         log = logg;
     }
 
-    public boolean PlusMoney(int balance, Player owner) {
-        int currentBalance = readfromAccountTable(owner);
-        UpdateAccountinAccountTable(currentBalance + value, owner);
+    public boolean PlusMoney(int value, String owner) {
+        int currentBalance = new Financesql(log).readfromAccountTable(owner)[0];
+        new Financesql(log).UpdateAccountinAccountTable(currentBalance + value, owner);
         return true;
     }
-    public boolean MinusMoney(int value, Player owner) {
-        int currentBalance = readfromAccountTable(owner);
-        UpdateAccountinAccountTable(currentBalance - value, owner);
+    public boolean MinusMoney(int value, String owner) {
+        int currentBalance = new Financesql(log).readfromAccountTable(owner)[0];
+        new Financesql(log).UpdateAccountinAccountTable(currentBalance - value, owner);
         return true;
     }
-    public int GetBalance(Player owner) {
-        readfromAccountTable(owner);
-        return 1000000000;
+    public int GetBalance(String owner) {
+        return new Financesql(log).readfromAccountTable(owner)[0];
     }
-    public void SetBalance(int balance, Player owner) {
-        UpdateAccountinAccountTable(balance, owner)
+    public void SetBalance(int balance, String owner) {
+        new Financesql(log).UpdateAccountinAccountTable(balance, owner);
     }
 
-    public boolean CreateAccount(Player owner) {
-        addtoAccountTable(owner, 2000, false);
-        return true;
+    public boolean CreateAccount(String owner) {
+        return new Financesql(log).addtoAccountTable(owner, 2000, false);
     }
-    public boolean RemoveAccount(Player owner) {
-        deletefromAccountTable(owner);
-        return true;
+    public boolean RemoveAccount(String owner) {
+        return new Financesql(log).deletefromAccountTable(owner);
     }
 }

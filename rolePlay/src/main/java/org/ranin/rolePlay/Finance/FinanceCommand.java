@@ -46,30 +46,30 @@ public class FinanceCommand implements CommandExecutor {
                                         + "money remove-account PLAYER\n" + "money reset-account PLAYER");
                         return true;
                     } else if (args[0] == "balance") {
-                        player.sendMessage("Your balance is: " + readfromAccountTable(sender));
+                        player.sendMessage("Your balance is: " + new Finance(log).GetBalance(player.getName()));
                         return true;
                     }
                 } else {
                     switch (args[0]) {
                         case "add":
-                            PlusMoney(args[1], sender);
+                            new Finance(log).PlusMoney(Integer.valueOf(args[1]), player.getName());
                             return true;
                         case "set":
-                            SetBalance(args[1], sender);
+                            new Finance(log).SetBalance(Integer.valueOf(args[1]), player.getName());
                             return true;
                         case "transfer":
-                            MinusMoney(args[1], sender);
-                            PlusMoney(args[1], args[2]);
+                            new Finance(log).MinusMoney(Integer.valueOf(args[1]), player.getName());
+                            new Finance(log).PlusMoney(Integer.valueOf(args[1]), args[2]);
                             return true;
                         case "create-account":
-                            CreateAccount(sender);
+                            new Finance(log).CreateAccount(player.getName());
                             return true;
                         case "remove-account":
-                            RemoveAccount(sender);
+                            new Finance(log).RemoveAccount(player.getName());
                             return true;
                         case "reset-account":
-                            RemoveAccount(sender);
-                            CreateAccount(sender);
+                            new Finance(log).RemoveAccount(player.getName());
+                            new Finance(log).CreateAccount(player.getName());
                             return true;
                         default:
                             player.sendMessage("§6Usage:\n§7/money COMMAND ARG1 (ARG2)\n§6§7/finance help for help");

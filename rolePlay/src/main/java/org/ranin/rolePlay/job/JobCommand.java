@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -63,16 +64,15 @@ public class JobCommand implements CommandExecutor {
                                 player.sendMessage("§cSERVER OPERATOR STUFF:\n"
                                         + "§6list of jobs of online players: §7/job listAll\n"
                                         + "§6cheat XP to job: §7/job xp XP\n"
-                                        + "§6set your job new (regardless if you have one or not): §7/job put JOB\n"
+                                        + "§6set your job new (regardless if you have one or not): §7/job put PLAYER JOB\n"
                                         + "§6de/activate pvpmode: §7/job config pvpmode BOOL");
                             }
                             return true;
                         case "listAll":
                             if (player.isOp()) {
-                                player.sendMessage("§6Your job:\n" + "§6job §7" + info[0] + " §6xp §7" + info[1]);
                                 List<Player> allplayers = player.getWorld().getPlayers();
                                 for (Player singplayer : allplayers) {
-                                    info = new Jobsql(log).readfromJobTable(player.getName());
+                                    info = new Jobsql(log).readfromJobTable(singplayer.getName());
                                     player.sendMessage("§6" + singplayer.getName() + "'s job:\n" + "§6job §7" + info[0]
                                             + " §6xp §7" + info[1]);
                                 }
@@ -96,14 +96,14 @@ public class JobCommand implements CommandExecutor {
                                 return false;
                             }
                         case "put":
-                            if (!player.isOp()) {
+                            if (!player.isOp() || args.length <= 2) {
                                 player.sendMessage("§e ---------- §fTip: job §e---------- \n"
                                         + "§7You are not allowed to do that yet\n"
                                         + "\n§6You can get a list of all available commands with: §7/job help");
                                 return false;
                             }
                             new Jobsql(log).deletefromJobTable(player.getName());
-                            return switchJobs(args[1], player, true);
+                            return switchJobs(args[1], Bukkit.getPlayer(args[2]), true);
                         case "xp":
                             if (!player.isOp()) {
                                 player.sendMessage("§e ---------- §fTip: job §e---------- \n"

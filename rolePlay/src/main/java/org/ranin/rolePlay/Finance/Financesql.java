@@ -120,7 +120,7 @@ public class Financesql {
         return res;
     }
 
-    public String[] UpdateAccountinAccountTable(String player, Integer balance) {
+    public String[] UpdateAccountinAccountTable(Integer balance,String player) {
         String[] res = new String[8];
         String sql = "UPDATE " + dbname + " SET = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {

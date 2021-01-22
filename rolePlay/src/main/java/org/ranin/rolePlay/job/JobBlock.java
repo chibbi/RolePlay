@@ -49,7 +49,6 @@ public class JobBlock {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
         if (info[0] == null) {
             log.fine("No Job yet");
-            System.out.println(info);
         } else {
             for (PotionEffect eff : player.getActivePotionEffects()) {
                 player.removePotionEffect(eff.getType());
@@ -144,13 +143,13 @@ public class JobBlock {
         List<Player> allplayers = wor.getPlayers();
         for (Player singplayer : allplayers) {
             String[] info = new Jobsql(log).readfromJobTable(singplayer.getName());
-            if (info[0] == "knight") {
-                double maxDist = 5L;
+            if (info[0] != null && info[0].equals("knight")) {
+                double maxDist = 10L; // TODO make configurable
                 for (Player other : allplayers) {
-                    if (other.getLocation().distance(singplayer.getLocation()) <= maxDist) {
+                    if ( other != singplayer && other.getLocation().distance(singplayer.getLocation()) <= maxDist) {
                         String[] inf = new Jobsql(log).readfromJobTable(other.getName());
-                        if (inf[0] != "assassin") {
-                            setEffects(other, "REGENERATION", 1 + (Integer.parseInt(info[1])));
+                        if (inf[0] != null && inf[0] != "assassin") {
+                            other.addPotionEffect(new PotionEffect(PotionEffectType.getByName("REGENERATION"), 65, Integer.parseInt(info[1])));
                         }
                     }
                 }

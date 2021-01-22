@@ -57,7 +57,7 @@ public class App extends JavaPlugin {
                 new JobBlock(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world_nether"));
                 new JobBlock(getLogger()).giveNearbyReg(Bukkit.getWorld("world"));
             }
-        }, 60L, 60L);
+        }, 10L, 10L);
     }
 
     @Override

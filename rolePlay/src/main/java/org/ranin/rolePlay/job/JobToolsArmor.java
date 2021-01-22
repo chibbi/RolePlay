@@ -46,7 +46,6 @@ public class JobToolsArmor {
         if (!allowedMain) {
             player.dropItem(true);
         } else if (!allowedOff) {
-            System.out.println(player.getInventory().getItemInOffHand().getType().name());
             ItemStack items = new ItemStack(Material.COBBLESTONE);
             items.setAmount(1);
             player.getInventory().setItemInOffHand(items);
