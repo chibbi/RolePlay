@@ -26,38 +26,33 @@ public class Finance {
     public FileConfiguration xpConfig;
 
     public Finance(Logger logg) {
-        // jobConfig = new JobConfig(logg).getCustomConfig();
-        // xpConfig = new XpConfig(logg).getCustomConfig();
         log = logg;
     }
 
-    public boolean PlusMoney(int __VALUE, Player owner) {
-        // add __VALUE to row `owner`
-        // return success or failure
+    public boolean PlusMoney(int balance, Player owner) {
+        int currentBalance = readfromAccountTable(owner);
+        UpdateAccountinAccountTable(currentBalance + value, owner);
         return true;
     }
-    public boolean MinusMoney(int __VALUE, Player owner) {
-        // subtract __VALUE from row `owner`
-        // return success or failure
+    public boolean MinusMoney(int value, Player owner) {
+        int currentBalance = readfromAccountTable(owner);
+        UpdateAccountinAccountTable(currentBalance - value, owner);
         return true;
     }
     public int GetBalance(Player owner) {
-        // return value of row `owner`
+        readfromAccountTable(owner);
         return 1000000000;
     }
-    public void SetBalance(int __VALUE, Player owner) {
-        // set balance field of row `owner` to __VALUE
+    public void SetBalance(int balance, Player owner) {
+        UpdateAccountinAccountTable(balance, owner)
     }
 
     public boolean CreateAccount(Player owner) {
-        // if `owner` iselementof table {return false} else {create new row `owner`; SetBalance(DEFAULT, `owner`); return true}
+        addtoAccountTable(owner, 2000, false);
         return true;
     }
     public boolean RemoveAccount(Player owner) {
-        // if `owner`iselementof table {remove row `owner`; return true} else {return false}
+        deletefromAccountTable(owner);
         return true;
     }
-
-    // if(PLAYER does JOB_TASK) {PlusMoney(SALARY, PLAYER)}
-
 }

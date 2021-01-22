@@ -46,28 +46,30 @@ public class FinanceCommand implements CommandExecutor {
                                         + "money remove-account PLAYER\n" + "money reset-account PLAYER");
                         return true;
                     } else if (args[0] == "balance") {
-                        // TODO get balance from row of player
+                        player.sendMessage("Your balance is: " + readfromAccountTable(sender));
                         return true;
                     }
                 } else {
                     switch (args[0]) {
                         case "add":
-                            // TODO add args[1] to row of player
+                            PlusMoney(args[1], sender);
                             return true;
                         case "set":
-                            // TODO set args[1] for row of player
+                            SetBalance(args[1], sender);
                             return true;
                         case "transfer":
-                            // TODO add args[1] to row of args[2], subtract args[1] from row of player
+                            MinusMoney(args[1], sender);
+                            PlusMoney(args[1], args[2]);
                             return true;
                         case "create-account":
-                            // TODO add args[1] to account table
+                            CreateAccount(sender);
                             return true;
                         case "remove-account":
-                            // TODO remove args[1] from account table
+                            RemoveAccount(sender);
                             return true;
                         case "reset-account":
-                            // TODO set all values of row args[1] to defaults
+                            RemoveAccount(sender);
+                            CreateAccount(sender);
                             return true;
                         default:
                             player.sendMessage("§6Usage:\n§7/money COMMAND ARG1 (ARG2)\n§6§7/finance help for help");

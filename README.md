@@ -33,7 +33,8 @@ If you have a job idea, but can't implement it yet, because of missing config fe
 ##### For more information, you can look into [the wiki](https://github.com/chibbi/RolePlay/wiki)
   
 you can find [all possible Materials (Blocks and Items) here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)  
-you can find [all possible Effects/Potions here.](https://github.com/chibbi/RolePlay/wiki/Effects-Potions)
+you can find [all possible Effects/Potions here.](https://github.com/chibbi/RolePlay/wiki/Effects-Potions)  
+you can find [all possible entities / mobs here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html)
 
 ## Contributors:
  - Job System: [chibbi](https://github.com/chibbi)
