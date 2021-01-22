@@ -99,6 +99,7 @@ public class JobListener implements Listener {
                 // ( or just drop a shitton of stuff to a farmer if hes a farmer xD?)
                 // isCancelled seems not to work and getDrops doens't exist, maybe you'll find
                 // something in the Doc?
+                event.isCancelled(true);
             }
         }
     }

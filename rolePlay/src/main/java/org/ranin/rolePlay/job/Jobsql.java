@@ -141,6 +141,7 @@ public class Jobsql {
     }
 
     public void UpdateXpinJobTable(String player, int xp) {
+        System.out.println(player + " gets " + xp + " xp!");
         String sql = "UPDATE " + dbname + " SET main_job_xp = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, xp);
