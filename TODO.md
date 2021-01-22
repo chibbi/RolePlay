@@ -7,10 +7,11 @@ Code:
    - [ ] do the same for farmers, because thats not yet implemented => need more knowledge
    - [ ] look at configurations, is it uniform (is a blacksmith really the only one who can craft his stuff)
    - [ ] command for list all jobs, and how many players have the job
- - Finance System:
-   - [ ] Edit this Readme
-   - [ ] Work on it?
    - [ ] Knight gets some (1000-4000) xp removed, if he triggers a raid
+   - [ ] add nether mobs to default config
+ - Finance System:
+   - [ ] Edit this todo list
+   - [ ] Work on it?
  
 Wiki:
  - [ ] change the Potion/Effect page to be a table
