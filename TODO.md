@@ -10,6 +10,7 @@ Code:
  - Finance System:
    - [ ] Edit this Readme
    - [ ] Work on it?
+   - [ ] Knight gets some (1000-4000) xp removed, if he triggers a raid
  
 Wiki:
  - [ ] change the Potion/Effect page to be a table
