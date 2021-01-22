@@ -11,15 +11,13 @@ If you have a job idea, but can't implement it yet, because of missing config fe
 #### USES JRE 11  
 
 #### Currently implemented by default:
- - farmer
- - lumberjack
- - miner
- - builder
- - hunter
- - warrior
- - knight
- - assassin
- - blacksmith
+| job | description | job | description |
+| :--: | --------- | :--: | ----------- |
+| farmer | specialized in farming plants | lumberjack | specialized in cutting and processing wood  |
+| miner | specialized in mining ores, and stone | builder | specialized in moving dirt and building |
+| hunter | specialized in hunting friendly mobs (for food) | warrior | specialized in hunting hostile mobs (for fun i guess xD) |
+| knight | specialized in protecting villages and other players | assassin | specialized in killing other players (may do it for money) |
+| blacksmith | specialized in processing ores | --- | --- |
 
 #### Currently in development:
  - these here are jobs that need a specific event to be implemented to work
