@@ -2,11 +2,36 @@
 RolePlay is a Spigot plugin that is under very active development and adds jobs that you have to commit to ~~and a financial system~~.
 It currently let's you choose one job, in which you specialize, and you depend on others to have different jobs, to be able to progress.    
 
-An example gameplay would be, that you are a miner, who is the only one who can use good pickaxes. But nbecause your not good at forging, you need a blacksmith, who can craft you a good pickaxe, otherwise the blacksmith needs you, because you are the only one who can use the pickaxes and give him ores => something to work.    
-There are also farmer, which will be the only ones who can efficiently give food, and hunters which will be the only ones who can efficiently hunt. it is not thought of, to completly deny hunting and farming for other players, but that is still in development.
-#### USES JRE 11  
- 
+**An example gameplay** would be, that you are a miner, who is the only one who can use good pickaxes. But nbecause your not good at forging, you need a blacksmith, who can craft you a good pickaxe, otherwise the blacksmith needs you, because you are the only one who can use the pickaxes and give him ores => something to work.    
+There are also farmer, which will be the only ones who can efficiently give food, and hunters which will be the only ones who can efficiently hunt. it is not thought of, to completly deny hunting and farming for other players, but that is still in development.  
   
+**You can add ANY job you want**, as long as you can realise it with the currently available configs. I am really trying to deliver a really modular easy to configure plugin, which has a lot of possibilities.
+The currently available jobs, and what i am talking about, is just the way i use the plugin.  
+If you have a job idea, but can't implement it yet, because of missing config features (or other features) i will gladly look into it, and try to implement it, if you [open a feature  request](https://github.com/chibbi/RolePlay/issues/new?assignees=&labels=feature&template=feature_request.md&title=).
+#### USES JRE 11  
+
+#### Currently implemented by default:
+ - farmer
+ - lumberjack
+ - miner
+ - builder
+ - hunter
+ - warrior
+ - knight
+ - assassin
+ - blacksmith
+
+#### Currently in development:
+ - these here are jobs that need a specific event to be implemented to work
+ - [20%] mage
+ - [50%] hunter
+ - [39%] farmer
+
+#### Currently planned:
+ - merchant
+ - stonemason
+ - painter
+ - fisherman
 ##### For more information, you can look into [the wiki](https://github.com/chibbi/RolePlay/wiki)
   
 you can find [all possible Materials (Blocks and Items) here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)  
