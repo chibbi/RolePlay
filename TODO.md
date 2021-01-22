@@ -1,6 +1,7 @@
 Code:
  - General:
    - [ ] change all text outputs to be configured by a yml file, so that they are not hardcoded
+   - [ ] make a version, which does NOT shout every single "debug" message into minecraft chat
  - Job System:
    - [ ] make the hunter the only one who gets a good amount (normal amount) of flesh by hunting. others should only get flesh on every third animal or smth like that => already know everything
    - [ ] do the same for farmers, because thats not yet implemented => need more knowledge
