@@ -38,4 +38,4 @@ you can find [all possible entities / mobs here.](https://hub.spigotmc.org/javad
 
 ## Contributors:
  - Job System: [chibbi](https://github.com/chibbi)
- - Finance System: [raninninn](https://github.com/raninninn)
+ - Finance System: [raninninn](https://github.com/raninninn) / [chibbi](https://github.com/chibbi)
