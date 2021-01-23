@@ -7,7 +7,8 @@ There are also farmer, which will be the only ones who can efficiently give food
   
 **You can add ANY job you want**, as long as you can realise it with the currently available configs. I am really trying to deliver a really modular easy to configure plugin, which has a lot of possibilities.
 The currently available jobs, and what i am talking about, is just the way i use the plugin.  
-If you have a job idea, but can't implement it yet, because of missing config features (or other features) i will gladly look into it, and try to implement it, if you [open a feature  request](https://github.com/chibbi/RolePlay/issues/new?assignees=&labels=feature&template=feature_request.md&title=).
+If you have a job idea, but can't implement it yet, because of missing config features (or other features) i will gladly look into it, and try to implement it, if you [open a feature  request](https://github.com/chibbi/RolePlay/issues/new?assignees=&labels=feature&template=feature_request.md&title=).  
+##### For more information, you can look into [the wiki](https://github.com/chibbi/RolePlay/wiki)
 #### USES JRE 11  
 
 #### Currently implemented by default:
@@ -30,7 +31,6 @@ If you have a job idea, but can't implement it yet, because of missing config fe
  - stonemason
  - painter
  - fisherman
-##### For more information, you can look into [the wiki](https://github.com/chibbi/RolePlay/wiki)
   
 you can find [all possible Materials (Blocks and Items) here.](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html)  
 you can find [all possible Effects/Potions here.](https://github.com/chibbi/RolePlay/wiki/Effects-Potions)  
