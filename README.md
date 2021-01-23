@@ -23,7 +23,6 @@ If you have a job idea, but can't implement it yet, because of missing config fe
 #### Currently in development:
  - these here are jobs that need a specific event to be implemented to work
  - [20%] mage
- - [50%] hunter
  - [39%] farmer
 
 #### Currently planned:
