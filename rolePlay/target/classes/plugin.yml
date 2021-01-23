@@ -6,6 +6,9 @@ authors: ["chibbi", "raninninn"]
 description: "An exhaustive plugin to make roleplay servers even more enjoyable and challengin."
 website: "www.spigotmc.org"
 commands:
+   warn:
+      description: "warns a player"
+      permission: rolePlay.warn
    kit:
       description: "Gives You stuff"
       permission: rolePlay.kit
@@ -16,6 +19,9 @@ commands:
       description: "lets you manage your finances"
       permission: rolePlay.money
 permissions:
+   rolePlay.warn:
+      description: Permission for the /warn command
+      default: op
    rolePlay.kit:
       description: Permission for the /kit command
       default: op

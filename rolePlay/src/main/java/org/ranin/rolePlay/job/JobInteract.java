@@ -12,27 +12,31 @@ import java.util.logging.Logger;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 
-public class JobToolsArmor {
+public class JobInteract {
     private Logger log;
 
     private FileConfiguration jobConfig;
     private FileConfiguration xpConfig;
     private FileConfiguration interactConfig;
 
-    public JobToolsArmor(Logger logg) {
+    public JobInteract(Logger logg) {
         jobConfig = new JobConfig(logg).getCustomConfig();
         xpConfig = new XpConfig(logg).getCustomConfig();
         interactConfig = new InteractConfig(logg).getCustomConfig();
         log = logg;
     }
 
-    public void isBreaking(Player player, Material type) {
+    public boolean isBreaking(Player player) {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
         boolean allowedMain = false;
         boolean allowedOff = false;
+        if (info[0] == null) {
+            player.sendMessage("§6EY JOOOOO \nPlease choose a job (§7/job help§6)");
+            return false;
+        }
         for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
-            if (singleKeys.length == 4 && !singleKeys[1].equals("allowedTools") && singleKeys[0].equals(info[0])) {
+            if (singleKeys.length == 4 && singleKeys[0].equals(info[0]) && singleKeys[1].equals("allowedTools")) {
                 if (singleKeys[3].equals(player.getInventory().getItemInMainHand().getType().name())) {
                     allowedMain = true;
                 } else if (player.getInventory().getItemInOffHand().getType().name() == "AIR"
@@ -44,30 +48,28 @@ public class JobToolsArmor {
             }
         }
         if (!allowedMain) {
-            player.dropItem(true);
+            return false;
         } else if (!allowedOff) {
-            ItemStack items = new ItemStack(Material.COBBLESTONE);
-            items.setAmount(1);
-            player.getInventory().setItemInOffHand(items);
+            return false;
         }
+        return true;
     }
 
-    public void isInteracting(Player player, Material type) {
+    public boolean isInteracting(Player player) {
         String[] info = new Jobsql(log).readfromJobTable(player.getName());
         for (String keys : interactConfig.getKeys(true)) {
             String[] singleKeys = keys.split("\\.");
-            if (singleKeys.length == 4 && singleKeys[1].equals("deniedTools") && singleKeys[0].equals(info[0])) {
+            if (singleKeys.length == 4 && singleKeys[0].equals(info[0]) && singleKeys[1].equals("deniedTools")) {
                 if (singleKeys[3].equals(player.getInventory().getItemInMainHand().getType().name())) {
-                    player.dropItem(true);
+                    return false;
                 } else if (singleKeys[3].equals(player.getInventory().getItemInOffHand().getType().name())) {
-                    ItemStack items = new ItemStack(Material.COBBLESTONE);
-                    items.setAmount(1);
-                    player.getInventory().setItemInOffHand(items);
+                    return false;
                 } else {
 
                 }
             }
         }
+        return true;
     }
 
 }

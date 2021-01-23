@@ -96,23 +96,24 @@ public class JobCommand implements CommandExecutor {
                                 return false;
                             }
                         case "put":
-                            if (!player.isOp() || args.length <= 2) {
-                                player.sendMessage("§e ---------- §fTip: job §e---------- \n"
-                                        + "§7You are not allowed to do that yet\n"
-                                        + "\n§6You can get a list of all available commands with: §7/job help");
-                                return false;
-                            }
-                            new Jobsql(log).deletefromJobTable(player.getName());
-                            return switchJobs(args[1], Bukkit.getPlayer(args[2]), true);
-                        case "xp":
                             if (!player.isOp()) {
                                 player.sendMessage("§e ---------- §fTip: job §e---------- \n"
                                         + "§7You are not allowed to do that yet\n"
                                         + "\n§6You can get a list of all available commands with: §7/job help");
                                 return false;
                             }
-                            new Jobsql(log).AddXp(player.getName(), Integer.parseInt(args[1]));
-                            player.sendMessage("§6Set xp to §7" + args[1]);
+                            new Jobsql(log).deletefromJobTable(player.getName());
+                            // Bukkit.getPlayer(args[2])to get another player didn't work
+                            return switchJobs(args[1], player, true);
+                        case "xp":
+                            if (!player.isOp() || args.length <= 2) {
+                                player.sendMessage("§e ---------- §fTip: job §e---------- \n"
+                                        + "§7You are not allowed to do that yet\n"
+                                        + "\n§6You can get a list of all available commands with: §7/job help");
+                                return false;
+                            }
+                            new Jobsql(log).AddXp(args[1], Integer.parseInt(args[2]));
+                            player.sendMessage("§6Set xp of §7" + args[1] + "§6 to §7" + args[2]);
                             return false;
 
                         case "config":
@@ -153,10 +154,10 @@ public class JobCommand implements CommandExecutor {
         for (String job : alljobs) {
             if (arg.equals(job)) {
                 if (add) {
-                    player.sendMessage("§6Set Job to " + arg);
+                    player.sendMessage("§6Set Job to §7" + arg);
                     new Jobsql(log).addtoJobTable(player.getName(), arg);
                 } else {
-                    player.sendMessage("§6Set Job to " + arg);
+                    player.sendMessage("§6Set Job to §7" + arg);
                     new Jobsql(log).UpdateJobinJobTable(player.getName(), arg);
                 }
                 return true;

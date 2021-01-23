@@ -33,12 +33,24 @@ public class InteractConfig {
             }
             // CRAFTING, BREAKING, INTERACTING STUFF CONFIG //
             // FARMER
+            cusconf.set("farmer.allowedTools.common.AIR", 1);
             cusconf.set("farmer.allowedTools.Hoe.NETHERITE_HOE", 1);
             cusconf.set("farmer.allowedTools.Hoe.DIAMOND_HOE", 1);
             cusconf.set("farmer.allowedTools.Hoe.GOLDEN_HOE", 1);
             cusconf.set("farmer.allowedTools.Hoe.IRON_HOE", 1);
             cusconf.set("farmer.allowedTools.Hoe.STONE_HOE", 1);
             cusconf.set("farmer.allowedTools.Hoe.WOODEN_HOE", 1);
+            cusconf.set("farmer.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("farmer.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("farmer.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("farmer.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("farmer.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("farmer.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("farmer.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("farmer.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("farmer.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("farmer.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("farmer.denyCraft.tools.SWORD", 1);
             cusconf.set("farmer.denyCraft.tools.PICKAXE", 1);
@@ -53,12 +65,24 @@ public class InteractConfig {
             cusconf.set("farmer.denyCraft.blocks.STONE", 1);
             cusconf.set("farmer.denyCraft.blocks.WOOD", 1);
             // LUMBERJACK
+            cusconf.set("lumberjack.allowedTools.common.AIR", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.NETHERITE_AXE", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.DIAMOND_AXE", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.GOLDEN_AXE", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.IRON_AXE", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.STONE_AXE", 1);
             cusconf.set("lumberjack.allowedTools.Hoe.WOODEN_AXE", 1);
+            cusconf.set("lumberjack.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("lumberjack.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("lumberjack.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("lumberjack.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("lumberjack.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("lumberjack.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("lumberjack.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("lumberjack.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("lumberjack.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("lumberjack.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("lumberjack.denyCraft.tools.SWORD", 1);
             cusconf.set("lumberjack.denyCraft.tools.PICKAXE", 1);
@@ -71,6 +95,7 @@ public class InteractConfig {
             cusconf.set("lumberjack.allowCraft.tools.WOODEN_SWORD", 1);
             cusconf.set("lumberjack.allowCraft.tools.WOODEN_HOE", 1);
             // MINER
+            cusconf.set("miner.allowedTools.common.AIR", 1);
             cusconf.set("miner.allowedTools.Hoe.NETHERITE_PICKAXE", 1);
             cusconf.set("miner.allowedTools.Hoe.DIAMOND_PICKAXE", 1);
             cusconf.set("miner.allowedTools.Hoe.GOLDEN_PICKAXE", 1);
@@ -79,6 +104,17 @@ public class InteractConfig {
             cusconf.set("miner.allowedTools.Hoe.WOODEN_PICKAXE", 1);
             cusconf.set("miner.allowedTools.Hoe.WOODEN_AXE", 1);
             cusconf.set("miner.allowedTools.shovel.WOODEN_SHOVEL", 1);
+            cusconf.set("miner.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("miner.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("miner.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("miner.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("miner.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("miner.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("miner.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("miner.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("miner.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("miner.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("miner.denyCraft.tools.SWORD", 1);
             cusconf.set("miner.denyCraft.tools.PICKAXE", 1);
@@ -92,6 +128,7 @@ public class InteractConfig {
             cusconf.set("miner.denyCraft.blocks.WOOD", 1);
             cusconf.set("miner.denyCraft.blocks.PLANKS", 1);
             // BUILDER
+            cusconf.set("builder.allowedTools.common.AIR", 1);
             cusconf.set("builder.allowedTools.shovel.WOODEN_PICKAXE", 1);
             cusconf.set("builder.allowedTools.shovel.WOODEN_AXE", 1);
             cusconf.set("builder.allowedTools.shovel.NETHERITE_SHOVEL", 1);
@@ -100,6 +137,17 @@ public class InteractConfig {
             cusconf.set("builder.allowedTools.shovel.IRON_SHOVEL", 1);
             cusconf.set("builder.allowedTools.shovel.STONE_SHOVEL", 1);
             cusconf.set("builder.allowedTools.shovel.WOODEN_SHOVEL", 1);
+            cusconf.set("builder.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("builder.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("builder.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("builder.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("builder.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("builder.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("builder.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("builder.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("builder.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("builder.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("builder.denyCraft.tools.SWORD", 1);
             cusconf.set("builder.denyCraft.tools.PICKAXE", 1);
@@ -114,12 +162,24 @@ public class InteractConfig {
             cusconf.set("builder.denyCraft.blocks.PLANKS", 1);
             // FISHERMAN
             // HUNTER
+            cusconf.set("hunter.allowedTools.common.AIR", 1);
             cusconf.set("hunter.allowedTools.Hoe.BOW", 1);
             cusconf.set("hunter.allowedTools.Hoe.CROSSBOW", 1);
             cusconf.set("hunter.allowedTools.Hoe.GOLDEN_SWORD", 1);
             cusconf.set("hunter.allowedTools.Hoe.IRON_SWORD", 1);
             cusconf.set("hunter.allowedTools.Hoe.STONE_SWORD", 1);
             cusconf.set("hunter.allowedTools.Hoe.WOODEN_SWORD", 1);
+            cusconf.set("hunter.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("hunter.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("hunter.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("hunter.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("hunter.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("hunter.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("hunter.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("hunter.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("hunter.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("hunter.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("hunter.denyCraft.tools.SWORD", 1);
             cusconf.set("hunter.denyCraft.tools.PICKAXE", 1);
@@ -133,12 +193,24 @@ public class InteractConfig {
             cusconf.set("hunter.denyCraft.blocks.WOOD", 1);
             cusconf.set("hunter.denyCraft.blocks.PLANKS", 1);
             // WARRIOR
+            cusconf.set("warrior.allowedTools.common.AIR", 1);
             cusconf.set("warrior.allowedTools.Hoe.NETHERITE_SWORD", 1);
             cusconf.set("warrior.allowedTools.Hoe.DIAMOND_SWORD", 1);
             cusconf.set("warrior.allowedTools.Hoe.GOLDEN_SWORD", 1);
             cusconf.set("warrior.allowedTools.Hoe.IRON_SWORD", 1);
             cusconf.set("warrior.allowedTools.Hoe.STONE_SWORD", 1);
             cusconf.set("warrior.allowedTools.Hoe.WOODEN_SWORD", 1);
+            cusconf.set("warrior.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("warrior.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("warrior.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("warrior.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("warrior.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("warrior.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("warrior.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("warrior.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("warrior.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("warrior.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("warrior.denyCraft.tools.SWORD", 1);
             cusconf.set("warrior.denyCraft.tools.PICKAXE", 1);
@@ -152,12 +224,24 @@ public class InteractConfig {
             cusconf.set("warrior.denyCraft.blocks.WOOD", 1);
             cusconf.set("warrior.denyCraft.blocks.PLANKS", 1);
             // KNIGHT
+            cusconf.set("knight.allowedTools.common.AIR", 1);
             cusconf.set("knight.allowedTools.Hoe.NETHERITE_SWORD", 1);
             cusconf.set("knight.allowedTools.Hoe.DIAMOND_SWORD", 1);
             cusconf.set("knight.allowedTools.Hoe.GOLDEN_SWORD", 1);
             cusconf.set("knight.allowedTools.Hoe.IRON_SWORD", 1);
             cusconf.set("knight.allowedTools.Hoe.STONE_SWORD", 1);
             cusconf.set("knight.allowedTools.Hoe.WOODEN_SWORD", 1);
+            cusconf.set("knight.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("knight.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("knight.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("knight.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("knight.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("knight.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("knight.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("knight.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("knight.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("knight.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("knight.denyCraft.tools.SWORD", 1);
             cusconf.set("knight.denyCraft.tools.PICKAXE", 1);
@@ -175,6 +259,18 @@ public class InteractConfig {
             // PAINTER
             // STONMASON
             // BLACKSMITH
+            cusconf.set("blacksmith.allowedTools.common.AIR", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_SWORD", 1);
+            /*
+             * cusconf.set("blacksmith.allowedTools.common.STONE_SWORD", 1);
+             * cusconf.set("blacksmith.allowedTools.common.IRON_SWORD", 1);
+             * cusconf.set("blacksmith.allowedTools.common.GOLDEN_SWORD", 1);
+             * cusconf.set("blacksmith.allowedTools.common.DIAMOND_SWORD", 1);
+             * cusconf.set("blacksmith.allowedTools.common.NETHERITE_SWORD", 1);
+             */
             cusconf.set("blacksmith.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("blacksmith.denyCraft.blockTools.STONE", 1);
             cusconf.set("blacksmith.denyCraft.blocks.WOOD", 1);

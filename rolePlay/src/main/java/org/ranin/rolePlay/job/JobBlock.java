@@ -11,7 +11,6 @@ TODO: ["think"]
 
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Vehicle;
-import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -146,10 +145,11 @@ public class JobBlock {
             if (info[0] != null && info[0].equals("knight")) {
                 double maxDist = 10L; // TODO make configurable
                 for (Player other : allplayers) {
-                    if ( other != singplayer && other.getLocation().distance(singplayer.getLocation()) <= maxDist) {
+                    if (other != singplayer && other.getLocation().distance(singplayer.getLocation()) <= maxDist) {
                         String[] inf = new Jobsql(log).readfromJobTable(other.getName());
                         if (inf[0] != null && inf[0] != "assassin") {
-                            other.addPotionEffect(new PotionEffect(PotionEffectType.getByName("REGENERATION"), 65, Integer.parseInt(info[1])));
+                            other.addPotionEffect(new PotionEffect(PotionEffectType.getByName("REGENERATION"), 65,
+                                    Integer.parseInt(info[1])));
                         }
                     }
                 }

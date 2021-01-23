@@ -9,33 +9,19 @@ description: "job class, it is a template for job"
 TODO: ["think"]
 */
 
-import java.util.Map;
 import java.util.Random;
 import java.util.logging.Logger;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.inventory.BlastingRecipe;
-import org.bukkit.inventory.CampfireRecipe;
-import org.bukkit.inventory.CookingRecipe;
-import org.bukkit.inventory.FurnaceRecipe;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.MerchantRecipe;
-import org.bukkit.inventory.Recipe;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.ShapelessRecipe;
-import org.bukkit.inventory.SmithingRecipe;
-import org.bukkit.inventory.SmokingRecipe;
-import org.bukkit.inventory.StonecuttingRecipe;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import net.md_5.bungee.api.chat.hover.content.Item;
-
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
 
 public class JobCrafting {
 
@@ -57,6 +43,27 @@ public class JobCrafting {
     }
 
     public void crafts(CraftItemEvent event) {
+        // see:
+        // https://www.spigotmc.org/threads/how-to-get-amount-of-item-crafted.377598/
+        ItemStack craftedItem = event.getInventory().getResult(); // Get result of recipe
+        Inventory Inventory = event.getInventory(); // Get crafting inventory
+        ClickType clickType = event.getClick();
+        int realAmount = craftedItem.getAmount();
+        if (clickType.isShiftClick()) {
+            int lowerAmount = craftedItem.getMaxStackSize() + 1000; // Set lower at recipe result max stack size + 1000
+                                                                    // (or just highter max stacksize of reciped item)
+            for (ItemStack actualItem : Inventory.getContents()) // For each item in crafting inventory
+            {
+                if (!actualItem.getType().isAir() && lowerAmount > actualItem.getAmount()
+                        && !actualItem.getType().equals(craftedItem.getType()))
+                    // if slot is not air && lowerAmount is higher than this slot amount && it's not
+                    // the recipe amount
+                    lowerAmount = actualItem.getAmount(); // Set new lower amount
+            }
+            // Calculate the final amount : lowerAmount * craftedItem.getAmount
+            realAmount = lowerAmount * craftedItem.getAmount();
+        }
+
         ItemStack result = event.getRecipe().getResult();
         String[] info = new Jobsql(log).readfromJobTable(event.getWhoClicked().getName());
         boolean allowed = true;
@@ -96,7 +103,8 @@ public class JobCrafting {
             if (singleKeys.length == 4 && singleKeys[1].equals("craft") && singleKeys[0].equals(info[0])) {
                 if (singleKeys[3].equals(result.getType().name())) {
                     new Jobsql(log).AddXp(event.getWhoClicked().getName(),
-                            Integer.parseInt(info[1]) + xpConfig.getInt(keys));
+                            Integer.parseInt(info[1]) + (xpConfig.getInt(keys) * result.getAmount()));
+                    System.out.println(xpConfig.getInt(keys) * realAmount);
                 }
             }
         }

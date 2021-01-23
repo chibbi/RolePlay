@@ -39,7 +39,7 @@ public class KitCommand implements CommandExecutor {
                         log.info("Gave " + player.getName() + "20 Bricks");
                         return true;
                     default:
-                        player.sendMessage("§7List of existing Kits:\ndiamond,bricks");
+                        player.sendMessage("§6List of existing Kits:\n§7diamond,bricks");
                         log.info(player.getName() + " has tried: " + Arrays.toString(args));
                 }
             } else {

@@ -1,5 +1,7 @@
 package org.ranin.rolePlay.job;
 
+import java.util.Random;
+
 /*
 author: "chibbi"
 description: "implements a Listener for Jobs"
@@ -7,7 +9,8 @@ TODO: ["add Listeners, which start and stop leveling and stuff", "implementing m
 */
 
 import java.util.logging.Logger;
-import org.bukkit.Bukkit;
+
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,6 +20,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockCanBuildEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.enchantment.EnchantItemEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
@@ -30,6 +34,18 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
 
 public class JobListener implements Listener {
+
+    private String[] friendlyMob = { "BAT", "BEE", "CAT", "CHICKEN", "COD", "COW", "DOLPHIN", "DONKEY", "FOX", "HORSE",
+            "IRON_GOLEM", "LLAMA", "MULE", "MUSHROOM_COW", "OCELOT", "PANDA", "PARROT", "PIG", "POLAR_BEAR",
+            "PUFFERFISH", "RABBIT", "SALMON", "SHEEP", "SNOWMAN", "SQUID", "STRIDER", "TRADER_LLAMA", "TROPICAL_FISH",
+            "TURTLE", "VILLAGER", "WOLF" };
+    // sure those are all
+    private String[] hostileMob = { "BLAZE", "CAVE_SPIDER", "CREEPER", "DROWNED", "ELDER_GUARDIAN", "ENDER_DRAGON",
+            "ENDERMAN", "ENDERMITE", "EVOKER", "EVOKER_FANGS", "GHAST", "GIANT", "GUARDIAN", "HOGLIN", "HUSK",
+            "ILLUSIONER", "MAGMA_CUBE", "PHANTOM", "PIGLIN", "PIGLIN_BRUTE", "PILLAGER", "RAVAGER", "SHULKER",
+            "SILVERFISH", "SKELETON", "SKELETON_HORSE", "SLIME", "SPIDER", "STRAY", "VEX", "VINDICATOR", "WITCH",
+            "WITHER", "WITHER_SKELETON", "ZOGLIN", "ZOMBIE", "ZOMBIE_HORSE", "ZOMBIE_VILLAGER", "ZOMBIFIED_PIGLIN" };
+    // sure those are all
 
     private Logger log;
     private FileConfiguration defaultConfig;
@@ -69,10 +85,55 @@ public class JobListener implements Listener {
     @EventHandler
     public void onMobDeath(EntityDeathEvent event) {
         if (event.getEntity().getKiller() instanceof Player) {
+            String[] info = new Jobsql(log).readfromJobTable(event.getEntity().getKiller().getName());
+            boolean dele = true;
+            System.out.println("KILLED " + event.getEntity().getType());
+            for (String friName : friendlyMob) {
+                if (event.getEntity().getType().name().equals(friName)) {
+                    if (info[0].equals("hunter")) {
+                        System.out.println("Killer is a hunter");
+                        dele = false;
+                    } else if (new Random().nextInt(10 - 1 + 1) + 1 <= 3) {
+                        System.out.println("Killer is a not a hunter but is lucky");
+                        dele = false;
+                    } else {
+                        System.out.println("will loose");
+                    }
+                }
+            }
+            for (String hosName : hostileMob) {
+                if (event.getEntity().getType().name().equals(hosName)) {
+                    if (info[0].equals("warrior")) {
+                        System.out.println("Killer is a warrior");
+                        dele = false;
+                    } else if (new Random().nextInt(10 - 1 + 1) + 1 <= 3) {
+                        System.out.println("Killer is a not a warrior but is lucky");
+                        dele = false;
+                    } else {
+                        System.out.println("will loose");
+                    }
+                }
+            }
+            if (dele) {
+                System.out.println("Deleting");
+                event.getDrops().clear(); // no drops
+                event.setDroppedExp(0); // no xp output
+            }
             // TODO: maybe disAllow kills of certain kinds, from certain professions????
             // https://bukkit.org/threads/custom-mob-drops.465022/
             // should be made here not in Job (for convenience)
             new JobBlock(log).killEntity(event.getEntity().getKiller(), event.getEntity());
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) {
+            Player player = (Player) event.getDamager();
+            System.out.println(player.getName() + " did damage");
+            if (new JobInteract(log).isBreaking(player) == false) {
+                event.setCancelled(true);
+            }
         }
     }
 
@@ -109,9 +170,15 @@ public class JobListener implements Listener {
         // for test if in Water and stuff like that
         if (event.getPlayer() instanceof Player) {
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                new JobToolsArmor(log).isInteracting(event.getPlayer(), event.getClickedBlock().getType());
+                if (new JobInteract(log).isInteracting(event.getPlayer()) == false) {
+                    event.getPlayer().sendMessage("§eYou lack the skill required to use this item!");
+                    event.setCancelled(true);
+                }
             } else if (event.getAction() == Action.LEFT_CLICK_BLOCK) {
-                new JobToolsArmor(log).isBreaking(event.getPlayer(), event.getClickedBlock().getType());
+                if (new JobInteract(log).isBreaking(event.getPlayer()) == false) {
+                    event.getPlayer().sendMessage("§eYou lack the skill required to use this item!");
+                    event.setCancelled(true);
+                }
             }
         }
     }

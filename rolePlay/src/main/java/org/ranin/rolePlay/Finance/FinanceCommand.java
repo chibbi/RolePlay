@@ -3,7 +3,7 @@ package org.ranin.rolePlay.Finance;
 /*
 author: "raninninn"
 description: "Commands for Finances"
-TODO: ["think"]
+TODO: ["add feedback"]
 */
 
 import java.util.Arrays;

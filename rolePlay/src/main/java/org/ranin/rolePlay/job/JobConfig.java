@@ -53,15 +53,12 @@ public class JobConfig {
             list.add("LUCK");
             cusconf.set("miner.effects.positives", list);
             list = new ArrayList<String>();
-            list.add("ABSORPTION");
             list.add("NIGHT_VISION");
             cusconf.set("warrior.effects.positives", list);
             list = new ArrayList<String>();
-            list.add("ABSORPTION");
-            list.add("HERO_OF_THE_VILLAGE");
+            list.add("HEALTH_BOOST");
             cusconf.set("knight.effects.positives", list);
             list = new ArrayList<String>();
-            list.add("ABSORPTION");
             list.add("JUMP");
             list.add("NIGHT_VISION");
             cusconf.set("assassin.effects.positives", list);
