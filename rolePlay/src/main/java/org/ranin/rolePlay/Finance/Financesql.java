@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Logger;
+
 import org.bukkit.Bukkit;
 
 public class Financesql {
@@ -71,7 +72,8 @@ public class Financesql {
 
     public boolean createAccountTable() {
         String sql = "CREATE TABLE IF NOT EXISTS " + dbname + " (\n" + "  player_id integer PRIMARY KEY,\n"
-                + " player text NOT NULL UNIQUE,\n" + "    balance int NOT NULL,\n" + "    banker boolean NOT NULL\n" + ");";
+                + " player text NOT NULL UNIQUE,\n" + "    balance int NOT NULL,\n" + "    banker boolean NOT NULL\n"
+                + ");";
         try {
             Statement stmt = conn.createStatement();
             stmt.execute(sql);
@@ -95,8 +97,8 @@ public class Financesql {
             disconnect();
             return true;
         } catch (SQLException e) {
-            log.warning("\033[31mCould not add " + player + " with " + balance + " and " + banker + " to " + dbname + " on " + dbname
-                    + " database\033[39m");
+            log.warning("\033[31mCould not add " + player + " with " + balance + " and " + banker + " to " + dbname
+                    + " on " + dbname + " database\033[39m");
             log.info(e.getMessage());
         }
         disconnect();
@@ -120,7 +122,7 @@ public class Financesql {
         return res;
     }
 
-    public String[] UpdateAccountinAccountTable(Integer balance,String player) {
+    public String[] UpdateAccountinAccountTable(Integer balance, String player) {
         String[] res = new String[8];
         String sql = "UPDATE " + dbname + " SET = ? WHERE player=?;";
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -130,8 +132,8 @@ public class Financesql {
             disconnect();
             return res;
         } catch (SQLException e) {
-            log.warning(
-                    "\033[31mCould not read Account Table at player = " + player + " on " + dbname + " database\033[39m");
+            log.warning("\033[31mCould not read Account Table at player = " + player + " on " + dbname
+                    + " database\033[39m");
             log.info(e.getMessage());
         }
         disconnect();
@@ -172,7 +174,7 @@ public class Financesql {
     }
 
     public String getUuid(String player) {
-        return(player);
+        return (player);
 
     }
 

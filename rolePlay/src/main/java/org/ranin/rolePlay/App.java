@@ -1,5 +1,11 @@
 package org.ranin.rolePlay;
 
+import java.io.File;
+
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
+
 /*
 author: chibbi
 description: "Initiator of the whole Plugin"
@@ -8,20 +14,15 @@ TODO: ["add all future classes", "let it do stuff"]
 
 import org.ranin.rolePlay.Finance.FinanceCommand;
 import org.ranin.rolePlay.Finance.FinanceTabCompletion;
+import org.ranin.rolePlay.Finance.Financesql;
 import org.ranin.rolePlay.job.InteractConfig;
-import org.ranin.rolePlay.job.JobBlock;
 import org.ranin.rolePlay.job.JobCommand;
 import org.ranin.rolePlay.job.JobConfig;
-import org.ranin.rolePlay.job.XpConfig;
-import org.ranin.rolePlay.job.Jobsql;
 import org.ranin.rolePlay.job.JobListener;
 import org.ranin.rolePlay.job.JobTabCompletion;
-
-import java.io.File;
-
-import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.ranin.rolePlay.job.Jobsql;
+import org.ranin.rolePlay.job.Tasks;
+import org.ranin.rolePlay.job.XpConfig;
 
 public class App extends JavaPlugin {
 
@@ -44,6 +45,7 @@ public class App extends JavaPlugin {
         new XpConfig(getLogger()).getCustomConfig();
         new InteractConfig(getLogger()).getCustomConfig();
         new Jobsql(getLogger()).createJobTable();
+        new Financesql(getLogger()).createAccountTable();
         this.getCommand("kit").setExecutor(new KitCommand(getLogger()));
         this.getCommand("kit").setTabCompleter(new KitTabCompletion(getLogger()));
         this.getCommand("warn").setExecutor(new WarnCommand(getLogger()));
@@ -60,15 +62,13 @@ public class App extends JavaPlugin {
 
     }
 
-    public int id = 1;
-
     public void startScheduler() {
         Bukkit.getServer().getScheduler().runTaskTimer(this, new Runnable() {
             @Override
             public void run() {
-                new JobBlock(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world"));
-                new JobBlock(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world_nether"));
-                new JobBlock(getLogger()).giveNearbyReg(Bukkit.getWorld("world"));
+                new Tasks(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world"));
+                new Tasks(getLogger()).loadEveryoneEffects(Bukkit.getWorld("world_nether"));
+                new Tasks(getLogger()).giveNearbyReg(Bukkit.getWorld("world"));
             }
         }, 10L, 10L);
     }

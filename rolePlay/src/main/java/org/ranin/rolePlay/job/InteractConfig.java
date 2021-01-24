@@ -9,6 +9,7 @@ TODO: []
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Logger;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
@@ -272,8 +273,11 @@ public class InteractConfig {
              * cusconf.set("blacksmith.allowedTools.common.NETHERITE_SWORD", 1);
              */
             cusconf.set("blacksmith.deniedTools.fishing.FISHING_ROD", 1);
-            cusconf.set("blacksmith.denyCraft.blockTools.STONE", 1);
-            cusconf.set("blacksmith.denyCraft.blocks.WOOD", 1);
+            cusconf.set("blacksmith.allowCraft.tools.WOODEN_SHOVEL", 1);
+            cusconf.set("blacksmith.allowCraft.tools.WOODEN_AXE", 1);
+            cusconf.set("blacksmith.allowCraft.tools.WOODEN_PICKAXE", 1);
+            cusconf.set("blacksmith.allowCraft.tools.WOODEN_SWORD", 1);
+            // cusconf.set("blacksmith.denyCraft.blocks.WOOD", 1);
             cusconf.set("blacksmith.denyCraft.blocks.PLANKS", 1);
             try {
                 cusconf.save(customConfigFile);

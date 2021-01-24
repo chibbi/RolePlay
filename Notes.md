@@ -2,6 +2,8 @@
 [Command Completer?(Tabcomplete)](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/server/TabCompleteEvent.html)  
 [no cobble generator](https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/block/BlockFormEvent.html)  
  
+ there is a PlayerFishEvent
+ 
 - MC Colors:
   - ```&f``` = white
   - ```&0``` = black

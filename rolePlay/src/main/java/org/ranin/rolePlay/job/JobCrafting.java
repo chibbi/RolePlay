@@ -1,8 +1,5 @@
 package org.ranin.rolePlay.job;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
 author: ["chibbi","raninninn"]
 description: "job class, it is a template for job"
@@ -11,6 +8,9 @@ TODO: ["think"]
 
 import java.util.Random;
 import java.util.logging.Logger;
+
+import org.bukkit.Material;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.enchantment.EnchantItemEvent;
@@ -20,8 +20,6 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 
 public class JobCrafting {
 
@@ -48,6 +46,9 @@ public class JobCrafting {
         ItemStack craftedItem = event.getInventory().getResult(); // Get result of recipe
         Inventory Inventory = event.getInventory(); // Get crafting inventory
         ClickType clickType = event.getClick();
+        if (craftedItem == null) {
+            return;
+        }
         int realAmount = craftedItem.getAmount();
         if (clickType.isShiftClick()) {
             int lowerAmount = craftedItem.getMaxStackSize() + 1000; // Set lower at recipe result max stack size + 1000

@@ -10,7 +10,6 @@ TODO: ["add Listeners, which start and stop leveling and stuff", "implementing m
 
 import java.util.logging.Logger;
 
-import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -27,11 +26,12 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.FurnaceExtractEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
 import org.bukkit.event.inventory.PrepareSmithingEvent;
-import org.bukkit.event.player.PlayerHarvestBlockEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.ranin.rolePlay.Finance.Finance;
 
 public class JobListener implements Listener {
 
@@ -62,7 +62,8 @@ public class JobListener implements Listener {
             if (info[0] == null) {
                 event.getPlayer().sendMessage("§6EY JOOOOO \nPlease choose a job (§7/job help§6)");
             }
-            new JobBlock(log).loadEffects(event.getPlayer());
+            new Tasks(log).loadEffects(event.getPlayer());
+            new Finance(log).CreateAccount(event.getPlayer().getName());
         }
     }
 
@@ -78,7 +79,7 @@ public class JobListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (event.getEntity().getKiller() instanceof Player) {
-            new JobBlock(log).killPlayer(event.getEntity().getKiller(), event.getEntity());
+            new JobXp(log).killPlayer(event.getEntity().getKiller(), event.getEntity());
         }
     }
 
@@ -122,7 +123,7 @@ public class JobListener implements Listener {
             // TODO: maybe disAllow kills of certain kinds, from certain professions????
             // https://bukkit.org/threads/custom-mob-drops.465022/
             // should be made here not in Job (for convenience)
-            new JobBlock(log).killEntity(event.getEntity().getKiller(), event.getEntity());
+            new JobXp(log).killEntity(event.getEntity().getKiller(), event.getEntity());
         }
     }
 
@@ -130,7 +131,6 @@ public class JobListener implements Listener {
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
             Player player = (Player) event.getDamager();
-            System.out.println(player.getName() + " did damage");
             if (new JobInteract(log).isBreaking(player) == false) {
                 event.setCancelled(true);
             }
@@ -140,26 +140,38 @@ public class JobListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new JobBlock(log).breaks(event.getPlayer(), event.getBlock());
+            new JobXp(log).breaks(event.getPlayer(), event.getBlock());
+            // faRMING
+            if (event.getBlock().getType().name() == "POTATO" || event.getBlock().getType().name() == "WHEAT"
+                    || event.getBlock().getType().name() == "CARROTS" || event.getBlock().getType().name() == "BEETROOT"
+                    || event.getBlock().getType().name() == "PUMPKIN" || event.getBlock().getType().name() == "COCOA"
+                    || event.getBlock().getType().name() == "MELON" || event.getBlock().getType().name() == "SUGAR_CANE"
+                    || event.getBlock().getType().name() == "NETHER_WART"
+                    || event.getBlock().getType().name() == "FARMLAND") {
+                String[] info = new Jobsql(log).readfromJobTable(event.getPlayer().getName());
+                if (event.getPlayer() instanceof Player) {
+                    if (!info[0].equals("farmer")) {
+                        event.getPlayer().sendMessage("§eYou lack the skill required to harvest!");
+                        event.setCancelled(true);
+                    }
+                }
+            }
         }
     }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         if (event.getPlayer() instanceof Player) {
-            new JobBlock(log).places(event.getPlayer(), event.getBlock());
+            new JobXp(log).places(event.getPlayer(), event.getBlock());
         }
     }
 
     @EventHandler
-    public void onHarvest(PlayerHarvestBlockEvent event) {
+    public void onFishing(PlayerFishEvent event) {
         String[] info = new Jobsql(log).readfromJobTable(event.getPlayer().getName());
         if (event.getPlayer() instanceof Player) {
-            if (info[0] != "farmer") {
-                // TODO: implement something, which denys harvesting
-                // ( or just drop a shitton of stuff to a farmer if hes a farmer xD?)
-                // isCancelled seems not to work and getDrops doens't exist, maybe you'll find
-                // something in the Doc?
+            if (info[0] != "fisher") {
+                event.getPlayer().sendMessage("§eYou lack the skill required to harvest!");
                 event.setCancelled(true);
             }
         }
@@ -187,14 +199,12 @@ public class JobListener implements Listener {
     public void onBlockPlaceOn(BlockCanBuildEvent event) {
         // for test if in Water and stuff like that
         if (event.getPlayer() instanceof Player) {
-            new JobBlock(log).placesOn(event.getPlayer(), event.getBlock());
         }
     }
 
     @EventHandler
     public void onVehicleEnter(VehicleEnterEvent event) {
         if (event.getEntered() instanceof Player) {
-            new JobBlock(log).enters(event.getEntered(), event.getVehicle());
             // TODO: probably stay here? (should be destroyed and put into the players inv,
             // chance to completle destroy)
             // if player not fisher or messenger or smth like that

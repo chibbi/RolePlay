@@ -20,7 +20,8 @@ public class KitTabCompletion implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         List<String> l = new ArrayList<String>();
         if (args.length == 1) {
-            l.add("TEXT");
+            l.add("diamond");
+            l.add("bricks");
         } else if (args.length == 2) {
             l.add("TEXT");
         }
