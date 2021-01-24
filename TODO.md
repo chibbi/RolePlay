@@ -15,7 +15,9 @@ Code:
  - Finance System:
    - [ ] Edit this todo list
    - [ ] add feedback to the commands
- 
+   - [ ] especially on rewrite, a class which contains arrays of materials and mobs (friendly mobs, wood stuff,stone stuff, and so on) => would greatly simplify stuff
+   - [ ] add IRON and DIAMOND stuff to denyCraft in every class
+
 Wiki:
  - [ ] change the Potion/Effect page to be a table
  - [ ] create a Item/Block page

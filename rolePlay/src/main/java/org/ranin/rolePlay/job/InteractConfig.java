@@ -259,26 +259,33 @@ public class InteractConfig {
             // MERCHANT
             // PAINTER
             // STONMASON
+            // currently blacksmith inherits stonmasons abilitys (and also his xp)
+            cusconf.set("blacksmith.allowedTools.common.AIR", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_SHOVEL", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_AXE", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_PICKAXE", 1);
+            cusconf.set("blacksmith.allowedTools.common.WOODEN_SWORD", 1);
+            cusconf.set("blacksmith.deniedTools.fishing.FISHING_ROD", 1);
+            cusconf.set("blacksmith.denyCraft.blocks.WOOD", 1);
+            cusconf.set("blacksmith.denyCraft.blocks.PLANKS", 1);
+            cusconf.set("blacksmith.denyCraft.blocks.DOOR", 1);
             // BLACKSMITH
             cusconf.set("blacksmith.allowedTools.common.AIR", 1);
             cusconf.set("blacksmith.allowedTools.common.WOODEN_SHOVEL", 1);
             cusconf.set("blacksmith.allowedTools.common.WOODEN_AXE", 1);
             cusconf.set("blacksmith.allowedTools.common.WOODEN_PICKAXE", 1);
             cusconf.set("blacksmith.allowedTools.common.WOODEN_SWORD", 1);
-            /*
-             * cusconf.set("blacksmith.allowedTools.common.STONE_SWORD", 1);
-             * cusconf.set("blacksmith.allowedTools.common.IRON_SWORD", 1);
-             * cusconf.set("blacksmith.allowedTools.common.GOLDEN_SWORD", 1);
-             * cusconf.set("blacksmith.allowedTools.common.DIAMOND_SWORD", 1);
-             * cusconf.set("blacksmith.allowedTools.common.NETHERITE_SWORD", 1);
-             */
             cusconf.set("blacksmith.deniedTools.fishing.FISHING_ROD", 1);
             cusconf.set("blacksmith.allowCraft.tools.WOODEN_SHOVEL", 1);
             cusconf.set("blacksmith.allowCraft.tools.WOODEN_AXE", 1);
             cusconf.set("blacksmith.allowCraft.tools.WOODEN_PICKAXE", 1);
             cusconf.set("blacksmith.allowCraft.tools.WOODEN_SWORD", 1);
-            // cusconf.set("blacksmith.denyCraft.blocks.WOOD", 1);
+            cusconf.set("blacksmith.allowCraft.tools.IRON_DOOR", 1);
+            // activate, when adding stonemason =>
+            // cusconf.set("blacksmith.denyCraft.blockTools.STONE", 1);
+            cusconf.set("blacksmith.denyCraft.blockTools.WOOD", 1);
             cusconf.set("blacksmith.denyCraft.blocks.PLANKS", 1);
+            cusconf.set("blacksmith.denyCraft.blocks.DOOR", 1);
             try {
                 cusconf.save(customConfigFile);
             } catch (IOException e) {

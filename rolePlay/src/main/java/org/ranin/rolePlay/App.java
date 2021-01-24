@@ -53,7 +53,7 @@ public class App extends JavaPlugin {
         this.getCommand("job").setExecutor(new JobCommand(getLogger(), getConfig()));
         this.getCommand("job").setTabCompleter(new JobTabCompletion(getLogger()));
         this.getCommand("money").setExecutor(new FinanceCommand(getLogger()));
-        this.getCommand("money").setTabCompleter(new FinanceTabCompletion(getLogger()));
+        this.getCommand("money").setTabCompleter(new FinanceTabCompletion());
         getServer().getPluginManager().registerEvents(new Listeners(), this);
         getServer().getPluginManager().registerEvents(new JobListener(getLogger(), config), this);
         getLogger().info("Hello, SpigotMC!");

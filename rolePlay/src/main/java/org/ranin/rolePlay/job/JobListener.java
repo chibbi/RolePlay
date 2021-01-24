@@ -85,45 +85,43 @@ public class JobListener implements Listener {
 
     @EventHandler
     public void onMobDeath(EntityDeathEvent event) {
+        boolean dele = true;
         if (event.getEntity().getKiller() instanceof Player) {
             String[] info = new Jobsql(log).readfromJobTable(event.getEntity().getKiller().getName());
-            boolean dele = true;
             System.out.println("KILLED " + event.getEntity().getType());
             for (String friName : friendlyMob) {
                 if (event.getEntity().getType().name().equals(friName)) {
                     if (info[0].equals("hunter")) {
-                        System.out.println("Killer is a hunter");
                         dele = false;
                     } else if (new Random().nextInt(10 - 1 + 1) + 1 <= 3) {
-                        System.out.println("Killer is a not a hunter but is lucky");
+                        event.getEntity().getKiller().sendMessage("Oh you were lucky");
                         dele = false;
                     } else {
-                        System.out.println("will loose");
+                        event.getEntity().getKiller().sendMessage("You don't know how to gut animal");
                     }
                 }
             }
             for (String hosName : hostileMob) {
                 if (event.getEntity().getType().name().equals(hosName)) {
                     if (info[0].equals("warrior")) {
-                        System.out.println("Killer is a warrior");
                         dele = false;
                     } else if (new Random().nextInt(10 - 1 + 1) + 1 <= 3) {
-                        System.out.println("Killer is a not a warrior but is lucky");
+                        event.getEntity().getKiller().sendMessage("Oh you were lucky");
                         dele = false;
                     } else {
-                        System.out.println("will loose");
+                        event.getEntity().getKiller().sendMessage("You don't know how to gut a monster");
                     }
                 }
-            }
-            if (dele) {
-                System.out.println("Deleting");
-                event.getDrops().clear(); // no drops
-                event.setDroppedExp(0); // no xp output
             }
             // TODO: maybe disAllow kills of certain kinds, from certain professions????
             // https://bukkit.org/threads/custom-mob-drops.465022/
             // should be made here not in Job (for convenience)
             new JobXp(log).killEntity(event.getEntity().getKiller(), event.getEntity());
+        }
+        if (dele) {
+            System.out.println("Deleting");
+            event.getDrops().clear(); // no drops
+            event.setDroppedExp(0); // no xp output
         }
     }
 
@@ -141,7 +139,7 @@ public class JobListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getPlayer() instanceof Player) {
             new JobXp(log).breaks(event.getPlayer(), event.getBlock());
-            // faRMING
+            // Farming
             if (event.getBlock().getType().name() == "POTATO" || event.getBlock().getType().name() == "WHEAT"
                     || event.getBlock().getType().name() == "CARROTS" || event.getBlock().getType().name() == "BEETROOT"
                     || event.getBlock().getType().name() == "PUMPKIN" || event.getBlock().getType().name() == "COCOA"
@@ -171,7 +169,7 @@ public class JobListener implements Listener {
         String[] info = new Jobsql(log).readfromJobTable(event.getPlayer().getName());
         if (event.getPlayer() instanceof Player) {
             if (info[0] != "fisher") {
-                event.getPlayer().sendMessage("§eYou lack the skill required to harvest!");
+                event.getPlayer().sendMessage("§eYou lack the skill required to fish!");
                 event.setCancelled(true);
             }
         }

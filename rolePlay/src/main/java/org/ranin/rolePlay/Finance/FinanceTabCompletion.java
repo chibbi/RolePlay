@@ -12,10 +12,7 @@ import org.bukkit.entity.Player;
 
 public class FinanceTabCompletion implements TabCompleter {
 
-    private Logger log;
-
-    public FinanceTabCompletion(Logger logg) {
-        log = logg;
+    public FinanceTabCompletion() {
     }
 
     @Override

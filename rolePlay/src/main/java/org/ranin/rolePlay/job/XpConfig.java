@@ -33,6 +33,20 @@ public class XpConfig {
             }
             // XP GIVING //
             // FARMER
+            // break
+            cusconf.set("farmer.break.crops.POTATO", 10);
+            cusconf.set("farmer.break.crops.CARROTS", 10);
+            cusconf.set("farmer.break.crops.PUMPKIN", 10);
+            cusconf.set("farmer.break.crops.MELON", 10);
+            cusconf.set("farmer.break.crops.NETHER_WART", 15);
+            cusconf.set("farmer.break.crops.WHEAT", 10);
+            cusconf.set("farmer.break.crops.BEETROOT", 10);
+            cusconf.set("farmer.break.crops.COCOA", 15);
+            cusconf.set("farmer.break.crops.SUGAR_CANE", 5);
+            // place
+            cusconf.set("farmer.place.block.FARMLAND", 50);
+            // craft
+            // TODO: add seeds
             // LUMBERJACK
             // break
             cusconf.set("lumberjack.break.Hoe.OAK_WOOD", 15);
@@ -54,6 +68,22 @@ public class XpConfig {
             // place
             // craft
             cusconf.set("lumberjack.craft.Hoe.CRAFTING_TABLE", 15);
+            cusconf.set("lumberjack.craft.Hoe.WHITE_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.YELLOW_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.RED_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.PURPLE_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.PINK_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.ORANGE_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.MAGENTA_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.LIME_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.LIGHT_GRAY_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.LIGHT_BLUE_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.GREEN_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.GRAY_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.CYAN_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.BROWN_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.BLUE_BED", 15);
+            cusconf.set("lumberjack.craft.Hoe.BLACK_BED", 15);
             cusconf.set("lumberjack.craft.Hoe.OAK_WOOD", 5);
             cusconf.set("lumberjack.craft.tool.SPRUCE_WOOD", 5);
             cusconf.set("lumberjack.craft.Hoe.BIRCH_WOOD", 5);
@@ -109,7 +139,6 @@ public class XpConfig {
             cusconf.set("lumberjack.craft.tool.DARH_OAK_FENCE_GATE", 3);
             cusconf.set("lumberjack.craft.tool.CRIMSON_FENCE_GATE", 5);
             cusconf.set("lumberjack.craft.tool.WARPED_FENCE_GATE", 5);
-            // TODO: add for stairs and slabs and so on
             cusconf.set("lumberjack.craft.tool.WOODEN_PICKAXE", 15);
             cusconf.set("lumberjack.craft.tool.WOODEN_PICKAXE", 15);
             cusconf.set("lumberjack.craft.tool.WOODEN_PICKAXE", 15);
@@ -175,16 +204,23 @@ public class XpConfig {
             // MERCHANT
             // PAINTER
             // STONMASON
+            // currently blacksmith inherits stonmasons xp (and also his abilitys)
+            cusconf.set("blacksmith.craft.tool.STONE_SWORD", 100);
+            cusconf.set("blacksmith.craft.tool.STONE_PICKAXE", 100);
+            cusconf.set("blacksmith.craft.tool.STONE_AXE", 100);
+            cusconf.set("blacksmith.craft.tool.STONE_SHOVEL", 100);
+            cusconf.set("blacksmith.craft.tool.STONE_HOE", 100);
             // BLACKSMITH
-            cusconf.set("blacksmith.craft.tool.DIAMOND_SWORD", 200);
-            cusconf.set("blacksmith.craft.tool.IRON_SWORD", 100);
-            cusconf.set("blacksmith.craft.tool.DIAMOND_PICKAXE", 200);
-            cusconf.set("blacksmith.craft.tool.IRON_PICKAXE", 100);
-            cusconf.set("blacksmith.craft.tool.DIAMOND_AXE", 200);
-            cusconf.set("blacksmith.craft.tool.IRON_AXE", 100);
-            cusconf.set("blacksmith.craft.tool.DIAMOND_SHOVEL", 200);
-            cusconf.set("blacksmith.craft.tool.IRON_SHOVEL", 100);
-            cusconf.set("blacksmith.craft.tool.IRON_INGOT", 40);
+            cusconf.set("blacksmith.craft.tool.DIAMOND_SWORD", 220);
+            cusconf.set("blacksmith.craft.tool.IRON_SWORD", 150);
+            cusconf.set("blacksmith.craft.tool.DIAMOND_PICKAXE", 220);
+            cusconf.set("blacksmith.craft.tool.IRON_PICKAXE", 150);
+            cusconf.set("blacksmith.craft.tool.DIAMOND_AXE", 220);
+            cusconf.set("blacksmith.craft.tool.IRON_AXE", 150);
+            cusconf.set("blacksmith.craft.tool.DIAMOND_SHOVEL", 220);
+            cusconf.set("blacksmith.craft.tool.IRON_SHOVEL", 150);
+            cusconf.set("blacksmith.craft.tool.DIAMOND_HOE", 220);
+            cusconf.set("blacksmith.craft.tool.IRON_HOE", 150);
             // MAGE
             try {
                 cusconf.save(customConfigFile);
