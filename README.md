@@ -1,4 +1,6 @@
 # RolePlay ![Maven Build](https://github.com/chibbi/RolePlay/workflows/Maven%20Build/badge.svg?branch=main&event=push) [![](https://tokei.rs/b1/github/chibbi/RolePlay)]()
+
+# REWRITTEN: [new Repository](https://github.com/chibbi/TrueDestiny)
 RolePlay is a Spigot plugin that is under very active development and adds jobs that you have to commit to ~~and a financial system~~.
 It currently let's you choose one job, in which you specialize, and you depend on others to have different jobs, to be able to progress.    
 
